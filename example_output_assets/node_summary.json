@@ -1,0 +1,53 @@
+[
+  {
+    "node_id": "node_story_forum",
+    "label_frequency": {
+      "A1": 1,
+      "B2": 1
+    },
+    "sentiment_distribution": {
+      "negative": 2
+    },
+    "total_effective_hits": 2
+  },
+  {
+    "node_id": "node_map_discussion",
+    "label_frequency": {
+      "D3": 1
+    },
+    "sentiment_distribution": {
+      "neutral": 1
+    },
+    "total_effective_hits": 1
+  },
+  {
+    "node_id": "node_ops_feedback",
+    "label_frequency": {
+      "H4": 1
+    },
+    "sentiment_distribution": {
+      "negative": 1
+    },
+    "total_effective_hits": 1
+  },
+  {
+    "node_id": "node_activity_comment",
+    "label_frequency": {
+      "C3": 1
+    },
+    "sentiment_distribution": {
+      "positive": 1
+    },
+    "total_effective_hits": 1
+  },
+  {
+    "node_id": "node_relic_talk",
+    "label_frequency": {
+      "E2": 1
+    },
+    "sentiment_distribution": {
+      "negative": 1
+    },
+    "total_effective_hits": 1
+  }
+]

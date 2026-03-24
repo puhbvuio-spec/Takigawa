@@ -1,0 +1,49 @@
+{
+  "input_file": "data/inbox/sample_feedback_input.csv",
+  "key_principles": {
+    "raw_text_first": true,
+    "post_title_post_tag_supplement_only": true,
+    "case_note_ignored_by_pipeline": true
+  },
+  "sample_observations": [
+    {
+      "record_id": "c1",
+      "what_it_demonstrates": "正文足以完成 A1 + B2 双标签判别，并触发边界复核。"
+    },
+    {
+      "record_id": "c6",
+      "what_it_demonstrates": "垃圾广告在预处理阶段识别为 spam_or_invalid，即使标题/标签像真实帖子，也不会被误判为业务标签。"
+    },
+    {
+      "record_id": "c7",
+      "what_it_demonstrates": "与 c1 近重复，被标记为 duplicate_of::c1。"
+    },
+    {
+      "record_id": "c8",
+      "what_it_demonstrates": "短文本在规则模式下不会仅凭标题标签硬判；更适合作为 LLM 模式下的补语境案例。"
+    },
+    {
+      "record_id": "c9",
+      "what_it_demonstrates": "正文语义不足时，即使标题/标签很强，也不应强行归到福利或公告主题。"
+    }
+  ],
+  "output_files": {
+    "assets": [
+      "boundary_results.json",
+      "diagnostics.json",
+      "label_results.json",
+      "node_summary.json",
+      "preprocess_output.json",
+      "presentation_rows.json",
+      "review_pool.json",
+      "sample_output_preview.json",
+      "statistics_rows.json"
+    ],
+    "reports": [
+      "node_summary.csv",
+      "preprocess_overview.csv",
+      "review_pool.csv",
+      "statistics_rows.csv"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+﻿record_id,failure_stage,failure_reason,predicted_hits,boundary_result,review_status
+c1,boundary_validation,manual_check_recommended,"['A1', 'B2']","{'record_id': 'c1', 'decision': 'USE', 'cut_ids': ['cut_1'], 'reason': 'cross_dimension_and_has_cut', 'raw_model_payload': None}",pending
+c6,preprocess,spam_or_invalid,,,pending
+c7,preprocess,duplicate_of::c1,,,pending

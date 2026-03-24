@@ -1,0 +1,10 @@
+﻿record_id,node_id,source_platform,publish_time,post_title,post_tag,raw_text,cleaned_text,duplicate_of,is_spam,is_template
+c1,node_story_forum,NGA,2026-03-23T10:22:00,2.7剧情讨论串,版本剧情；角色讨论,玲可戏份少，过了雅利洛6号就没了，她强度也太弱了。,"玲可戏份少,过了雅利洛6号就没了,她强度也太弱了。",,False,False
+c2,node_map_discussion,Bilibili,2026-03-23T11:05:00,翁法罗斯开荒体验,地图；探索；箱庭,新地图探索很好，奖励也不错，就是解谜有点重复。,"新地图探索很好,奖励也不错,就是解谜有点重复。",,False,False
+c3,node_ops_feedback,Weibo,2026-03-23T12:40:00,公告评论区,公告；运营反馈,这次回应很快，至少不是继续装死。,"这次回应很快,至少不是继续装死。",,False,False
+c4,node_activity_comment,Xiaohongshu,2026-03-23T13:10:00,版本活动吐槽,活动；小游戏,活动好玩，有创意，但后面有点换皮。,"活动好玩,有创意,但后面有点换皮。",,False,False
+c5,node_relic_talk,Tieba,2026-03-23T13:50:00,角色毕业成本讨论,养成；配装,遗器系统真的坐牢，歪词条，筛选也难用。,"遗器系统真的坐牢,歪词条,筛选也难用。",,False,False
+c6,node_noise_mixed,Forum,2026-03-23T14:20:00,3.2前瞻直播兑换码汇总,版本爆料；兑换码；福利,加微wx:abc888 获取充值返利 https://spam.example.com,加微 获取充值返利,,True,False
+c7,node_story_forum,NGA,2026-03-23T10:23:00,2.7剧情讨论串,版本剧情；角色讨论,玲可戏份少，过了雅利洛6号就没了，她强度也太弱了!!!,"玲可戏份少,过了雅利洛6号就没了,她强度也太弱了!!",c1,False,False
+c8,node_map_discussion,Bilibili,2026-03-23T15:10:00,翁法罗斯开荒体验,地图；探索；箱庭,这个是真不错。,这个是真不错。,,False,False
+c9,node_announcement_comment,Weibo,2026-03-23T16:00:00,3.2前瞻兑换码+卡池顺序,版本爆料；福利；卡池,看不懂在吹什么。,看不懂在吹什么。,,False,False

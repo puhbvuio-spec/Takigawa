@@ -1,0 +1,10 @@
+﻿record_id,node_id,source_platform,publish_time,label_hits,label_sentiments
+c1,node_story_forum,NGA,2026-03-23T10:22:00,"['A1', 'B2']","{'A1': 'negative', 'B2': 'negative'}"
+c2,node_map_discussion,Bilibili,2026-03-23T11:05:00,['D3'],{'D3': 'neutral'}
+c3,node_ops_feedback,Weibo,2026-03-23T12:40:00,['H4'],{'H4': 'negative'}
+c4,node_activity_comment,Xiaohongshu,2026-03-23T13:10:00,['C3'],{'C3': 'positive'}
+c5,node_relic_talk,Tieba,2026-03-23T13:50:00,['E2'],{'E2': 'negative'}
+c6,node_noise_mixed,Forum,2026-03-23T14:20:00,[],{}
+c7,node_story_forum,NGA,2026-03-23T10:23:00,[],{}
+c8,node_map_discussion,Bilibili,2026-03-23T15:10:00,[],{}
+c9,node_announcement_comment,Weibo,2026-03-23T16:00:00,[],{}

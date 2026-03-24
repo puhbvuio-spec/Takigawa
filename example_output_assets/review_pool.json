@@ -1,0 +1,33 @@
+[
+  {
+    "record_id": "c1",
+    "failure_stage": "boundary_validation",
+    "failure_reason": "manual_check_recommended",
+    "predicted_hits": [
+      "A1",
+      "B2"
+    ],
+    "boundary_result": {
+      "record_id": "c1",
+      "decision": "USE",
+      "cut_ids": [
+        "cut_1"
+      ],
+      "reason": "cross_dimension_and_has_cut",
+      "raw_model_payload": null
+    },
+    "review_status": "pending"
+  },
+  {
+    "record_id": "c6",
+    "failure_stage": "preprocess",
+    "failure_reason": "spam_or_invalid",
+    "review_status": "pending"
+  },
+  {
+    "record_id": "c7",
+    "failure_stage": "preprocess",
+    "failure_reason": "duplicate_of::c1",
+    "review_status": "pending"
+  }
+]

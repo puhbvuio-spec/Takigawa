@@ -1,0 +1,96 @@
+[
+  {
+    "record_id": "c1",
+    "node_id": "node_story_forum",
+    "source_platform": "NGA",
+    "publish_time": "2026-03-23T10:22:00",
+    "label_hits": [
+      "A1",
+      "B2"
+    ],
+    "label_sentiments": {
+      "A1": "negative",
+      "B2": "negative"
+    }
+  },
+  {
+    "record_id": "c2",
+    "node_id": "node_map_discussion",
+    "source_platform": "Bilibili",
+    "publish_time": "2026-03-23T11:05:00",
+    "label_hits": [
+      "D3"
+    ],
+    "label_sentiments": {
+      "D3": "neutral"
+    }
+  },
+  {
+    "record_id": "c3",
+    "node_id": "node_ops_feedback",
+    "source_platform": "Weibo",
+    "publish_time": "2026-03-23T12:40:00",
+    "label_hits": [
+      "H4"
+    ],
+    "label_sentiments": {
+      "H4": "negative"
+    }
+  },
+  {
+    "record_id": "c4",
+    "node_id": "node_activity_comment",
+    "source_platform": "Xiaohongshu",
+    "publish_time": "2026-03-23T13:10:00",
+    "label_hits": [
+      "C3"
+    ],
+    "label_sentiments": {
+      "C3": "positive"
+    }
+  },
+  {
+    "record_id": "c5",
+    "node_id": "node_relic_talk",
+    "source_platform": "Tieba",
+    "publish_time": "2026-03-23T13:50:00",
+    "label_hits": [
+      "E2"
+    ],
+    "label_sentiments": {
+      "E2": "negative"
+    }
+  },
+  {
+    "record_id": "c6",
+    "node_id": "node_noise_mixed",
+    "source_platform": "Forum",
+    "publish_time": "2026-03-23T14:20:00",
+    "label_hits": [],
+    "label_sentiments": {}
+  },
+  {
+    "record_id": "c7",
+    "node_id": "node_story_forum",
+    "source_platform": "NGA",
+    "publish_time": "2026-03-23T10:23:00",
+    "label_hits": [],
+    "label_sentiments": {}
+  },
+  {
+    "record_id": "c8",
+    "node_id": "node_map_discussion",
+    "source_platform": "Bilibili",
+    "publish_time": "2026-03-23T15:10:00",
+    "label_hits": [],
+    "label_sentiments": {}
+  },
+  {
+    "record_id": "c9",
+    "node_id": "node_announcement_comment",
+    "source_platform": "Weibo",
+    "publish_time": "2026-03-23T16:00:00",
+    "label_hits": [],
+    "label_sentiments": {}
+  }
+]

@@ -1,0 +1,874 @@
+{
+  "label_library_id": "star_rail_feedback_labels",
+  "label_library_version": "v3.0.0",
+  "game_id": "hsr_cn",
+  "labels": [
+    {
+      "label_id": "A1",
+      "level_1": "剧情叙事",
+      "level_2": "角色出场频率与分布",
+      "definition": "玩家对角色在主线、活动、支线中的亮相次数、时长和存在感分配的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可角色出场安排，认为戏份分配合理、存在感充足。",
+        "negative": "认为角色戏份偏少、存在感不足或出场分布失衡。",
+        "neutral": "仅提及角色出场情况，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "戏份少",
+        "存在感低",
+        "出场很多",
+        "总能见到",
+        "很久没出场"
+      ],
+      "boundary_hint": "若同句同时谈及角色戏份与角色强度，可优先按对象评价重心切分。",
+      "conflict_labels": [
+        "B2",
+        "B3"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "A2",
+      "level_1": "剧情叙事",
+      "level_2": "角色弧光完整性",
+      "definition": "玩家对角色故事线是否完整、成长过程是否成立、背景揭示是否圆满的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可角色故事线完整，认为人物成长、背景或结局处理充分。",
+        "negative": "认为角色塑造中断、成长断裂、背景交代不足或收束仓促。",
+        "neutral": "仅提及角色剧情或成长，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "没写完",
+        "塑造完整",
+        "弧光很好",
+        "没收住",
+        "成长线断了"
+      ],
+      "boundary_hint": "若同时讨论人设魅力与角色弧光，可根据“剧情经历”与“人格魅力”分开判定。",
+      "conflict_labels": [
+        "B4"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "A3",
+      "level_1": "剧情叙事",
+      "level_2": "区域剧情均衡性",
+      "definition": "玩家对不同星球、势力或篇章之间剧情资源分配是否均衡的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可不同区域或势力获得了相对均衡的剧情资源与关注度。",
+        "negative": "认为部分区域或势力被偏废、资源倾斜明显或篇幅失衡。",
+        "neutral": "仅比较不同区域剧情，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "偏心",
+        "吃书",
+        "资源倾斜",
+        "写得均衡",
+        "这个星球戏份太少"
+      ],
+      "boundary_hint": "若同时比较多个星球，可保持在同一片段内；若转入地图探索体验，则切向 D3。",
+      "conflict_labels": [
+        "D3"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "A4",
+      "level_1": "剧情叙事",
+      "level_2": "历史回访与记忆连接",
+      "definition": "玩家对早期角色、地点、事件是否在后续剧情中被提及、召回、延续或产生新联动的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可旧角色、旧事件或旧伏笔被有效回收、回应或延展。",
+        "negative": "认为旧内容被遗忘、搁置或缺乏后续回应。",
+        "neutral": "仅提及旧内容与当前剧情的联系，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "没后续",
+        "被忘了",
+        "终于提到了",
+        "回收伏笔",
+        "又提起"
+      ],
+      "boundary_hint": "与 A1 常共现；若主要在谈“是否再出现”偏向 A1，若在谈“是否被回应”偏向 A4。",
+      "conflict_labels": [
+        "A1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "A5",
+      "level_1": "剧情叙事",
+      "level_2": "叙事节奏与主线推进",
+      "definition": "玩家对主线剧情的信息密度、悬念设置、推进速度和章节节奏的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可主线节奏流畅、推进得当、信息释放合理。",
+        "negative": "认为主线拖沓、跳跃、注水、推进过慢或过快。",
+        "neutral": "仅讨论主线推进状况，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "拖沓",
+        "节奏太快",
+        "推进合理",
+        "信息量大",
+        "注水"
+      ],
+      "boundary_hint": "若同时涉及演出表现，可按“剧情推进”与“视听执行”分开切分。",
+      "conflict_labels": [
+        "A7",
+        "H1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "A6",
+      "level_1": "剧情叙事",
+      "level_2": "支线与活动剧情质量",
+      "definition": "玩家对独立支线和版本活动剧情在完整性、趣味性、深度上的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可支线或活动剧情完整、有趣、有深度。",
+        "negative": "认为支线或活动剧情敷衍、无聊、浅薄或结构松散。",
+        "neutral": "仅提及支线或活动剧情内容，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "活动剧情不错",
+        "支线很水",
+        "有深度",
+        "很敷衍",
+        "讲得完整"
+      ],
+      "boundary_hint": "若主要谈活动玩法本身而非剧情内容，应切向 C3。",
+      "conflict_labels": [
+        "C3"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "A7",
+      "level_1": "剧情叙事",
+      "level_2": "叙事演出表现",
+      "definition": "玩家对剧情中的动画、镜头、配音、配乐等综合演出表现力的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可剧情演出质量，认为镜头、动画、配音、配乐表现出色。",
+        "negative": "认为剧情演出平庸、出戏、廉价或表现力不足。",
+        "neutral": "仅提及演出元素，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "演出炸裂",
+        "镜头好",
+        "配音出戏",
+        "动画一般",
+        "氛围感强"
+      ],
+      "boundary_hint": "若集中讨论音乐质量，可与 F3 区分；剧情演出语境优先归 A7。",
+      "conflict_labels": [
+        "F3"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "B1",
+      "level_1": "角色设计",
+      "level_2": "角色外观设计",
+      "definition": "玩家对角色立绘、模型、动画等视觉设计吸引力和精致度的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可角色外观设计，认为立绘、模型或动作表现优秀。",
+        "negative": "认为角色外观设计平庸、廉价或不符合预期。",
+        "neutral": "仅提及角色外观元素，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "立绘好看",
+        "建模拉胯",
+        "动作帅",
+        "颜值高",
+        "不够精致"
+      ],
+      "boundary_hint": "若同时谈建模精度与角色魅力，视觉表现归 B1，人物魅力归 B4。",
+      "conflict_labels": [
+        "B4",
+        "F2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "B2",
+      "level_1": "角色设计",
+      "level_2": "角色强度与平衡",
+      "definition": "玩家对角色战斗能力、数值强度、功能定位及与其他角色平衡性的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可角色强度表现、定位合理性或平衡性。",
+        "negative": "认为角色过弱、过强、失衡或定位尴尬。",
+        "neutral": "仅提及角色强度相关信息，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "太弱",
+        "超模",
+        "强度不错",
+        "数值离谱",
+        "定位尴尬"
+      ],
+      "boundary_hint": "若与玩法环境绑定明显，可与 C1、C2 共同出现但不必强切。",
+      "conflict_labels": [
+        "C1",
+        "C2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "B3",
+      "level_1": "角色设计",
+      "level_2": "机制趣味性与独特性",
+      "definition": "玩家对角色技能机制的创新性、操作感、策略深度和玩法趣味性的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可角色机制有新意、好玩、有深度。",
+        "negative": "认为角色机制无聊、同质化、手感差或缺乏策略性。",
+        "neutral": "仅提及角色机制内容，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "机制好玩",
+        "很有创意",
+        "同质化",
+        "手感差",
+        "玩法无聊"
+      ],
+      "boundary_hint": "若评论重点转向整体战斗策略空间，应切向 C1。",
+      "conflict_labels": [
+        "C1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "B4",
+      "level_1": "角色设计",
+      "level_2": "人设独特性与魅力",
+      "definition": "玩家对角色背景、性格、语音塑造及整体人格魅力的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可角色性格鲜明、背景有吸引力、人格魅力突出。",
+        "negative": "认为角色脸谱化、无聊、缺乏魅力或塑造平淡。",
+        "neutral": "仅提及角色性格或背景，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "很有魅力",
+        "性格鲜明",
+        "太模板",
+        "没什么记忆点",
+        "人设讨喜"
+      ],
+      "boundary_hint": "若同时提及角色成长与结局，可与 A2 区分。",
+      "conflict_labels": [
+        "A2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "B5",
+      "level_1": "角色设计",
+      "level_2": "与世界观契合度",
+      "definition": "玩家对角色设定、形象和表现是否贴合《星穹铁道》整体科幻奇幻世界观的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可角色设计与世界观风格统一、设定契合。",
+        "negative": "认为角色设计突兀、违和或与世界观不匹配。",
+        "neutral": "仅提及角色与世界观关系，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "很契合",
+        "有违和感",
+        "不搭世界观",
+        "风格统一",
+        "设定突兀"
+      ],
+      "boundary_hint": "若评论主体转向整体宇宙沉浸感，应切向 H1。",
+      "conflict_labels": [
+        "H1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "C1",
+      "level_1": "玩法与战斗",
+      "level_2": "战斗策略深度",
+      "definition": "玩家对弱点击破、行动顺序等核心战斗机制带来的策略空间和思考深度的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可战斗机制有策略深度、决策空间足。",
+        "negative": "认为战斗缺乏策略、套路单一或机制空转。",
+        "neutral": "仅描述战斗机制，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "有策略",
+        "无脑",
+        "深度不足",
+        "击破机制",
+        "行动轴"
+      ],
+      "boundary_hint": "若评论重点是角色机制本身，归 B3；若重点是整体战斗系统，归 C1。",
+      "conflict_labels": [
+        "B3"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "C2",
+      "level_1": "玩法与战斗",
+      "level_2": "队伍搭配多样性",
+      "definition": "玩家对当前环境下可行阵容的丰富程度、流派选择空间和配队自由度的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可可行阵容丰富、配队自由度高。",
+        "negative": "认为环境固化、阵容单一、角色选择受限。",
+        "neutral": "仅提及配队现象，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "阵容丰富",
+        "绑死了",
+        "配队自由",
+        "必须带",
+        "套路太固定"
+      ],
+      "boundary_hint": "若重点在角色个体强弱，归 B2；若重点在环境与阵容生态，归 C2。",
+      "conflict_labels": [
+        "B2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "C3",
+      "level_1": "玩法与战斗",
+      "level_2": "版本活动玩法趣味性",
+      "definition": "玩家对版本主题活动玩法的创新性、趣味性和重复可玩性的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可活动玩法新颖、有趣、值得重复体验。",
+        "negative": "认为活动玩法重复、无聊、敷衍或缺乏创意。",
+        "neutral": "仅提及活动玩法内容，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "活动好玩",
+        "玩法无聊",
+        "有创意",
+        "换皮",
+        "重复度高"
+      ],
+      "boundary_hint": "若讨论的是活动剧情内容而非玩法内容，应切向 A6。",
+      "conflict_labels": [
+        "A6"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "C4",
+      "level_1": "玩法与战斗",
+      "level_2": "挑战难度合理性",
+      "definition": "玩家对高难内容难度曲线、机制压力和挑战门槛是否合理的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可挑战内容难度设计合理，兼具挑战性与公平性。",
+        "negative": "认为挑战内容过难、过简单、恶意或门槛设计失衡。",
+        "neutral": "仅提及挑战难度情况，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "太难",
+        "太简单",
+        "难度合理",
+        "恶心机制",
+        "门槛太高"
+      ],
+      "boundary_hint": "若评论重点在自动刷材料体验，应切向 C5；若在高难关卡体验，则归 C4。",
+      "conflict_labels": [
+        "C5"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "C5",
+      "level_1": "玩法与战斗",
+      "level_2": "自动化/速刷体验",
+      "definition": "玩家对自动战斗、材料刷取、重复流程效率及便利性的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可自动战斗与刷取流程高效、省心、体验流畅。",
+        "negative": "认为自动战斗不稳定、刷取繁琐、重复体验差。",
+        "neutral": "仅提及自动战斗或刷取流程，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "自动好用",
+        "速刷舒服",
+        "太坐牢",
+        "自动很蠢",
+        "刷素材烦"
+      ],
+      "boundary_hint": "若评论转向养成资源压力，可切向 E1 或 E2。",
+      "conflict_labels": [
+        "E1",
+        "E2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "D1",
+      "level_1": "内容与更新",
+      "level_2": "版本更新规模与质量",
+      "definition": "玩家对大版本新内容量与整体完成度、质量表现的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可版本更新内容丰富、质量高、完成度好。",
+        "negative": "认为版本内容偏少、质量一般、更新乏力。",
+        "neutral": "仅提及更新内容构成，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "内容很多",
+        "量大管饱",
+        "更新太少",
+        "版本空",
+        "质量不错"
+      ],
+      "boundary_hint": "若具体谈地图探索体验，应切向 D3；若谈整体版本充实度，归 D1。",
+      "conflict_labels": [
+        "D3"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "D2",
+      "level_1": "内容与更新",
+      "level_2": "长草期内容填充",
+      "definition": "玩家对长草期轻量内容供给、活跃维持手段和版本尾段安排的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可长草期仍有足够内容维持活跃度。",
+        "negative": "认为长草期空档明显、缺少可做内容。",
+        "neutral": "仅提及长草期情况，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "长草",
+        "没事做",
+        "还能玩",
+        "内容填充",
+        "版本后半太空"
+      ],
+      "boundary_hint": "若讨论长期目标不足，归 H2；若讨论阶段性内容填充，归 D2。",
+      "conflict_labels": [
+        "H2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "D3",
+      "level_1": "内容与更新",
+      "level_2": "新星球/地图探索体验",
+      "definition": "玩家对新开放区域的探索密度、解谜设计、奖励反馈和区域体验的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可新地图探索充实、解谜有趣、奖励反馈良好。",
+        "negative": "认为新区域空洞、解谜乏味、奖励反馈差。",
+        "neutral": "仅提及新区域探索内容，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "探索很好",
+        "地图空",
+        "解谜无聊",
+        "奖励不错",
+        "跑图舒服"
+      ],
+      "boundary_hint": "若聚焦美术风格和视觉冲击，归 F1；若聚焦可探索性，归 D3。",
+      "conflict_labels": [
+        "F1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "D4",
+      "level_1": "内容与更新",
+      "level_2": "老内容复用与更新",
+      "definition": "玩家对旧星球、旧玩法、旧模块是否被重新利用、扩展和更新的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可旧内容获得有效复用、更新或扩展。",
+        "negative": "认为旧内容被放置、复用不足或更新停滞。",
+        "neutral": "仅提及旧内容现状，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "旧地图回访",
+        "老玩法更新",
+        "吃老本",
+        "一直没动",
+        "复用得好"
+      ],
+      "boundary_hint": "若主要谈旧剧情回访，归 A4；若谈旧玩法/旧区域再利用，归 D4。",
+      "conflict_labels": [
+        "A4"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "E1",
+      "level_1": "系统与功能",
+      "level_2": "养成系统舒适度",
+      "definition": "玩家对角色升级、行迹、光锥、遗器等整体养成流程及资源消耗体验的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可养成流程顺畅、资源消耗合理、体验舒适。",
+        "negative": "认为养成成本高、流程繁琐、资源压力大。",
+        "neutral": "仅提及养成流程或资源需求，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "养成舒服",
+        "资源不够",
+        "太费材料",
+        "培养成本高",
+        "挺顺手"
+      ],
+      "boundary_hint": "若重点转向遗器掉落与筛选，应切向 E2。",
+      "conflict_labels": [
+        "E2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "E2",
+      "level_1": "系统与功能",
+      "level_2": "遗器系统体验",
+      "definition": "玩家对遗器掉落、强化、筛选、管理及整体随机性带来的体验的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可遗器系统便利、可管理、负担较低。",
+        "negative": "认为遗器系统随机性过强、强化痛苦、管理不便或坐牢感强。",
+        "neutral": "仅提及遗器系统机制，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "坐牢",
+        "歪词条",
+        "筛选难用",
+        "管理方便",
+        "掉落难受"
+      ],
+      "boundary_hint": "遗器相关抱怨优先归 E2，不与一般养成资源压力混淆。",
+      "conflict_labels": [
+        "E1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "E3",
+      "level_1": "系统与功能",
+      "level_2": "用户界面与交互",
+      "definition": "玩家对游戏内 UI 清晰度、布局合理性、操作流程便捷性的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可界面清晰、交互顺手、布局合理。",
+        "negative": "认为界面混乱、操作繁琐、功能入口不合理。",
+        "neutral": "仅提及界面或交互元素，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "UI 舒服",
+        "太难找",
+        "交互很顺",
+        "界面乱",
+        "操作麻烦"
+      ],
+      "boundary_hint": "若评论集中讨论系统功能缺失但非交互问题，可保留在其他系统标签下。",
+      "conflict_labels": [],
+      "status": "active"
+    },
+    {
+      "label_id": "E4",
+      "level_1": "系统与功能",
+      "level_2": "社交系统体验",
+      "definition": "玩家对好友、助战等轻度社交系统的实用性、便利性和趣味性的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可社交系统实用、有趣、对游玩有帮助。",
+        "negative": "认为社交系统薄弱、存在感低或功能价值不足。",
+        "neutral": "仅提及社交功能存在与使用情况，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "助战好用",
+        "社交太弱",
+        "好友系统没用",
+        "挺方便",
+        "存在感低"
+      ],
+      "boundary_hint": "若评论核心是外部社区或官方沟通，不归 E4，应切向 H4。",
+      "conflict_labels": [
+        "H4"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "F1",
+      "level_1": "视听与艺术",
+      "level_2": "地图场景美术",
+      "definition": "玩家对各世界场景在艺术风格、细节表现和视觉冲击上的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可场景美术风格突出、细节丰富、视觉表现优秀。",
+        "negative": "认为地图美术单调、粗糙、辨识度不足或缺乏冲击力。",
+        "neutral": "仅提及场景风格或地图表现，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "场景好看",
+        "美术很强",
+        "地图一般",
+        "没什么记忆点",
+        "视觉震撼"
+      ],
+      "boundary_hint": "若重点在探索玩法体验归 D3，若重点在视觉美术归 F1。",
+      "conflict_labels": [
+        "D3"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "F2",
+      "level_1": "视听与艺术",
+      "level_2": "角色与怪物建模",
+      "definition": "玩家对角色和敌人模型的精度、动作流畅度与整体三维表现的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可建模精度高、动作流畅、三维表现优秀。",
+        "negative": "认为建模粗糙、动作僵硬、表现失真或欠打磨。",
+        "neutral": "仅提及建模情况，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "建模好",
+        "动作僵",
+        "模型精致",
+        "怪物做得一般",
+        "面部崩"
+      ],
+      "boundary_hint": "若评论集中讨论角色外观魅力，归 B1；若强调三维精度与动作，归 F2。",
+      "conflict_labels": [
+        "B1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "F3",
+      "level_1": "视听与艺术",
+      "level_2": "音乐与音效",
+      "definition": "玩家对场景 BGM、战斗音乐、角色语音、界面音效等音频表现的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可音乐与音效质量高、贴合场景、增强沉浸感。",
+        "negative": "认为音乐平淡、音效出戏、语音表现欠佳或匹配度差。",
+        "neutral": "仅提及音乐、音效或语音，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "BGM 神",
+        "配乐一般",
+        "语音出戏",
+        "音效不错",
+        "不贴脸"
+      ],
+      "boundary_hint": "若评论在剧情演出语境中谈配乐，可与 A7 并存；纯音频评价优先归 F3。",
+      "conflict_labels": [
+        "A7"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "G1",
+      "level_1": "付费与商业",
+      "level_2": "抽卡体验与定价",
+      "definition": "玩家对星琼获取、抽卡概率、保底机制和整体抽卡感受的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可抽卡体验、保底设计或整体付费感受。",
+        "negative": "认为抽卡成本高、概率体验差或定价不合理。",
+        "neutral": "仅提及抽卡机制或资源结构，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "太贵",
+        "抽卡体验好",
+        "保底还行",
+        "星琼不够",
+        "吃相难看"
+      ],
+      "boundary_hint": "若评论重点转向福利发放数量，归 G2；若在谈抽卡本体感受，归 G1。",
+      "conflict_labels": [
+        "G2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "G2",
+      "level_1": "付费与商业",
+      "level_2": "版本福利与活动奖励",
+      "definition": "玩家对签到、活动、邮件等赠送抽卡资源和养成资源数量与质量的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可版本福利、活动奖励或资源投放力度。",
+        "negative": "认为福利不足、奖励寒酸或资源投放偏少。",
+        "neutral": "仅提及福利与奖励内容，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "福利多",
+        "抠门",
+        "送得少",
+        "奖励不错",
+        "蚊子腿"
+      ],
+      "boundary_hint": "若评论聚焦付费卡性价比，切向 G3。",
+      "conflict_labels": [
+        "G3"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "G3",
+      "level_1": "付费与商业",
+      "level_2": "大月卡/小月卡价值",
+      "definition": "玩家对月卡、通行证、特权卡等付费项目性价比的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可月卡或通行证具备较高性价比。",
+        "negative": "认为月卡或通行证回报不足、价格不值。",
+        "neutral": "仅提及月卡或通行证内容，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "性价比高",
+        "不值",
+        "月卡划算",
+        "通行证一般",
+        "太亏"
+      ],
+      "boundary_hint": "若评论重点为整体抽卡成本，归 G1；若为月卡回报，归 G3。",
+      "conflict_labels": [
+        "G1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "G4",
+      "level_1": "付费与商业",
+      "level_2": "皮肤等外观定价",
+      "definition": "玩家对角色皮肤等外观产品的价格合理性和购买意愿的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可外观产品价格合理、购买意愿较强。",
+        "negative": "认为外观定价偏高、性价比差或缺乏诚意。",
+        "neutral": "仅提及皮肤或外观商品，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "太贵了",
+        "价格合理",
+        "愿意买",
+        "不值这个价",
+        "皮肤太少"
+      ],
+      "boundary_hint": "若同时谈角色外观设计与皮肤定价，视觉审美归 B1，商业评价归 G4。",
+      "conflict_labels": [
+        "B1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "H1",
+      "level_1": "综合体验",
+      "level_2": "世界观沉浸感",
+      "definition": "玩家对游戏整体在构建科幻宇宙沉浸感方面成功度的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可游戏整体世界观统一、氛围强、沉浸感足。",
+        "negative": "认为世界观松散、氛围不足或沉浸体验被破坏。",
+        "neutral": "仅提及世界观设定或氛围，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "很有沉浸感",
+        "出戏",
+        "宇宙感强",
+        "氛围不够",
+        "世界观很稳"
+      ],
+      "boundary_hint": "若重点是角色与世界观匹配，归 B5；若重点是整体宇宙氛围，归 H1。",
+      "conflict_labels": [
+        "B5"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "H2",
+      "level_1": "综合体验",
+      "level_2": "长期目标与动力",
+      "definition": "玩家对游戏是否提供清晰、可持续、具有吸引力的长期追求目标的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可游戏具有长期追求、成长方向或持续游玩动力。",
+        "negative": "认为游戏缺乏长期目标、后期动力不足或留存驱动弱。",
+        "neutral": "仅提及长期目标现象，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "没动力了",
+        "目标明确",
+        "还想继续玩",
+        "后期空",
+        "追求感强"
+      ],
+      "boundary_hint": "若集中讨论长草期内容稀缺，归 D2；若讨论长期追求感，归 H2。",
+      "conflict_labels": [
+        "D2"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "H3",
+      "level_1": "综合体验",
+      "level_2": "新手/回坑体验",
+      "definition": "玩家对新玩家入门、老玩家回坑时的引导、追赶机制和资源补足体验的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可新手引导清晰、回坑衔接顺畅、追赶机制合理。",
+        "negative": "认为新手门槛高、回坑断层大、追赶压力重。",
+        "neutral": "仅提及新手或回坑流程，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "回坑难",
+        "新手劝退",
+        "引导不错",
+        "追赶轻松",
+        "上手门槛高"
+      ],
+      "boundary_hint": "若评论核心在资源与养成压力，可与 E1 并存。",
+      "conflict_labels": [
+        "E1"
+      ],
+      "status": "active"
+    },
+    {
+      "label_id": "H4",
+      "level_1": "综合体验",
+      "level_2": "运营沟通与舆情响应",
+      "definition": "玩家对官方与社区沟通效率、反馈回应速度及重大舆情处理方式的评价。",
+      "sentiment_enabled": true,
+      "sentiment_guide": {
+        "positive": "认可官方沟通及时、回应有效、对反馈处理积极。",
+        "negative": "认为官方沟通迟缓、装死、回应不足或态度敷衍。",
+        "neutral": "仅提及官方公告或社区反馈事件，未体现明确态度。"
+      },
+      "anchor_terms": [
+        "回应很快",
+        "装死",
+        "沟通差",
+        "听劝",
+        "不回应"
+      ],
+      "boundary_hint": "若评论主体是好友、助战等游戏内轻社交功能，归 E4；若是官方沟通，归 H4。",
+      "conflict_labels": [
+        "E4"
+      ],
+      "status": "active"
+    }
+  ]
+}
