@@ -542,24 +542,26 @@ class MindMapNodeMapper:
 
     @classmethod
     def _collect_with_id(cls, node: ET.Element, out: Dict[str, str], depth: int) -> None:
+        """递归收集所有非根、非叶的中间层级节点 ID→TEXT 映射。
+
+        收集范围：拥有子节点（非叶节点）且 depth >= 1 的所有节点。
+        叶节点（无子节点的最末端，通常是具体创作者/示例）不收集。
+        """
         children = [c for c in node if c.tag == "node"]
         if not children:
+            # 叶节点（通常是具体创作者），不收集——这是设计意图
             return
-        all_children_are_leaves = all(
-            len([gc for gc in c if gc.tag == "node"]) == 0
-            for c in children
-        )
-        if all_children_are_leaves and depth >= 2:
-            text = cls._clean_text(node.get("TEXT", ""))
-            node_id = node.get("ID", "")
-            if text:
-                out[node_id] = text
-                # 也存一份小写简化版，便于模糊匹配
-                simplified = re.sub(r"[^a-zA-Z0-9\u4e00-\u9fff]", "", text).lower()
+        # 当前节点有子节点 → 非叶节点，depth >= 1 时收录
+        node_id = node.get("ID", "")
+        text = cls._clean_text(node.get("TEXT", ""))
+        if node_id and text and depth >= 1:
+            out[node_id] = text
+            # 也存一份小写简化版，便于模糊匹配
+            simplified = re.sub(r"[^a-zA-Z0-9\u4e00-\u9fff]", "", text).lower()
+            if simplified:
                 out[simplified] = text
-        else:
-            for c in children:
-                cls._collect_with_id(c, out, depth + 1)
+        for c in children:
+            cls._collect_with_id(c, out, depth + 1)
 
     @classmethod
     def build_runtime_mapping(cls, mm_path: Path, node_ids: set) -> Dict[str, str]:
@@ -1139,7 +1141,7 @@ class ResultBuilder:
                 entropy -= p * math.log2(p)
         return entropy
 
-    def build_deep_analytics(self, statistics_rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def build_deep_analytics(self, statistics_rows: List[Dict[str, Any]], node_display_map: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
         """
         基于 statistics_rows 计算深度分析指标:
         1. 声量指数 (Voice Index) - 情感加权
@@ -1249,6 +1251,7 @@ class ResultBuilder:
             pos = sum(1 for s in sent_list if s == "positive")
             global_pos_ratio[lid] = pos / len(sent_list) if sent_list else 0
 
+        _ndm = node_display_map or {}
         tgi_rows = []
         for node_id, label_dict in label_by_node.items():
             for lid, sent_list in label_dict.items():
@@ -1261,6 +1264,7 @@ class ResultBuilder:
                 tgi = round((node_ratio / global_r) * 100, 1) if global_r > 0 else 0.0
                 tgi_rows.append({
                     "node_id": node_id,
+                    "node_display": _ndm.get(node_id, node_id),
                     "label_id": lid,
                     "display": f"{lb.level_1}/{lb.level_2}",
                     "node_positive_ratio": round(node_ratio * 100, 1),
@@ -1622,7 +1626,24 @@ body{{margin:0;padding:20px;background:#f5f7fb;color:#1f2d3d;font-family:"Micros
 </div>
 </div>
 
+{'<!-- ===== 深度分析模块 ===== -->' if has_deep else ''}
+{'<div class="header" style="margin-top:28px;"><div><h1>深度分析模块</h1><div class="sub">声量指数 · 共识度 · TGI指数 · 四象限偏好地图 · 标签共现网络</div></div></div>' if has_deep else ''}
+
+{'<div class="grid-2e">' if has_deep else ''}
+{'<div class="card"><h3 class="section-title">声量指数排行（情感加权）</h3><div class="sub" style="margin:-8px 0 10px;">声量指数 = (维度评论占比) × 情感均分 | 综合讨论热度与情感倾向</div><div id="voiceIndexChart" class="chart-box tall"></div></div>' if has_deep else ''}
+{'<div class="card"><h3 class="section-title">共识度分析（熵值法）</h3><div class="sub" style="margin:-8px 0 10px;">共识度 = 1 − 信息熵/最大熵 | 越接近1，社群观点越一致</div><div id="consensusChart" class="chart-box tall"></div></div>' if has_deep else ''}
+{'</div>' if has_deep else ''}
+
+{'<div class="card" style="margin-bottom:18px"><h3 class="section-title">四象限偏好地图</h3><div class="sub" style="margin:-8px 0 10px;">X轴 = 关注度(声量占比%) · Y轴 = 满意度(情感均分%) · 气泡大小 = 评论数 · 虚线 = 全局均值</div><div id="quadrantChart" style="height:560px"></div></div>' if has_deep else ''}
+
+{'<div class="grid-2e">' if has_deep else ''}
+{'<div class="card"><h3 class="section-title">TGI 偏好指数（社群纵切）</h3><div class="sub" style="margin:-8px 0 10px;">TGI = (社群正面占比 / 全网正面占比) × 100 | >100 偏好高于均值, <100 低于均值</div><div id="tgiChart" style="height:480px"></div></div>' if has_deep else ''}
+{'<div class="card"><h3 class="section-title">标签共现网络</h3><div class="sub" style="margin:-8px 0 10px;">连线粗细 = 共现频次 | 揭示玩家同时讨论哪些维度</div><div id="cooccurrenceChart" style="height:480px"></div></div>' if has_deep else ''}
+{'</div>' if has_deep else ''}
+
 <!-- ===== 负向 Pareto + 治理归因 ===== -->
+{'<div class="header" style="margin-top:28px;"><div><h1>基础分析模块</h1><div class="sub">问题集中度 · 治理归因 · 高频标签 · 平台分布 · 代表性原声</div></div></div>'}
+
 <div class="grid-2">
 <div class="card">
   <h3 class="section-title">负向问题集中度（Pareto）</h3>
@@ -1665,21 +1686,6 @@ body{{margin:0;padding:20px;background:#f5f7fb;color:#1f2d3d;font-family:"Micros
   {pos_voices_html}
 </div>
 </div>
-
-{'<!-- ===== 深度分析模块 ===== -->' if has_deep else ''}
-{'<div class="header" style="margin-top:28px;"><div><h1>深度分析模块</h1><div class="sub">声量指数 · 共识度 · TGI指数 · 四象限偏好地图 · 标签共现网络</div></div></div>' if has_deep else ''}
-
-{'<div class="grid-2e">' if has_deep else ''}
-{'<div class="card"><h3 class="section-title">声量指数排行（情感加权）</h3><div class="sub" style="margin:-8px 0 10px;">声量指数 = (维度评论占比) × 情感均分 | 综合讨论热度与情感倾向</div><div id="voiceIndexChart" class="chart-box tall"></div></div>' if has_deep else ''}
-{'<div class="card"><h3 class="section-title">共识度分析（熵值法）</h3><div class="sub" style="margin:-8px 0 10px;">共识度 = 1 − 信息熵/最大熵 | 越接近1，社群观点越一致</div><div id="consensusChart" class="chart-box tall"></div></div>' if has_deep else ''}
-{'</div>' if has_deep else ''}
-
-{'<div class="card" style="margin-bottom:18px"><h3 class="section-title">四象限偏好地图</h3><div class="sub" style="margin:-8px 0 10px;">X轴 = 关注度(声量占比%) · Y轴 = 满意度(情感均分%) · 气泡大小 = 评论数 · 虚线 = 全局均值</div><div id="quadrantChart" style="height:560px"></div></div>' if has_deep else ''}
-
-{'<div class="grid-2e">' if has_deep else ''}
-{'<div class="card"><h3 class="section-title">TGI 偏好指数（社群纵切）</h3><div class="sub" style="margin:-8px 0 10px;">TGI = (社群正面占比 / 全网正面占比) × 100 | >100 偏好高于均值, <100 低于均值</div><div id="tgiChart" style="height:480px"></div></div>' if has_deep else ''}
-{'<div class="card"><h3 class="section-title">标签共现网络</h3><div class="sub" style="margin:-8px 0 10px;">连线粗细 = 共现频次 | 揭示玩家同时讨论哪些维度</div><div id="cooccurrenceChart" style="height:480px"></div></div>' if has_deep else ''}
-{'</div>' if has_deep else ''}
 
 </div><!-- /container -->
 
@@ -1883,13 +1889,13 @@ if(quadrantData.length>0 && document.getElementById('quadrantChart')){{
 if(tgiData.length>0 && document.getElementById('tgiChart')){{
   const tc=echarts.init(document.getElementById('tgiChart'));
   deepCharts.push(tc);
-  const tgiLabels=tgiData.map(x=>x.node_id.replace('node_','')+' | '+x.display);
+  const tgiLabels=tgiData.map(x=>(x.node_display||x.node_id.replace('node_',''))+' | '+x.display);
   const tgiValues=tgiData.map(x=>x.tgi);
   tc.setOption({{
     tooltip:{{trigger:'axis',axisPointer:{{type:'shadow'}},
       formatter:function(p){{
         const d=tgiData[tgiData.length-1-p[0].dataIndex];
-        return '<b>'+d.node_id+'</b><br/>'+d.display+'<br/>TGI: '+d.tgi+'<br/>社群正面率: '+d.node_positive_ratio+'%<br/>全网正面率: '+d.global_positive_ratio+'%<br/>样本数: '+d.node_count;
+        return '<b>'+(d.node_display||d.node_id)+'</b><br/>'+d.display+'<br/>TGI: '+d.tgi+'<br/>社群正面率: '+d.node_positive_ratio+'%<br/>全网正面率: '+d.global_positive_ratio+'%<br/>样本数: '+d.node_count;
       }}
     }},
     grid:{{left:'45%',right:'10%',top:'3%',bottom:'3%',containLabel:false}},
@@ -2063,11 +2069,6 @@ class CommunityFeedbackPipeline:
             self.meta_store.update_stage(job.meta_path, "boundary_validation", "done")
 
             self.meta_store.update_stage(job.meta_path, "reporting", "running")
-            statistics_rows = result_builder.build_statistics_rows(clean_rows, label_results)
-            presentation_rows = result_builder.build_presentation_rows(clean_rows, label_results, boundary_results)
-            review_pool = result_builder.build_review_pool(clean_rows, label_results, boundary_results)
-            node_summary = result_builder.build_node_summary(statistics_rows)
-            deep_analytics = result_builder.build_deep_analytics(statistics_rows)
 
             # ── 加载 .mm 文件构建节点名映射 ─────────────────
             mm_path = self.runtime_paths.app_root / "星铁中国大陆网络社区生态地图.mm"
@@ -2075,6 +2076,12 @@ class CommunityFeedbackPipeline:
             node_display_map = MindMapNodeMapper.build_runtime_mapping(mm_path, all_node_ids)
             if node_display_map:
                 print(f"  ✅ 从 .mm 文件加载了 {len(node_display_map)} 个节点名映射")
+
+            statistics_rows = result_builder.build_statistics_rows(clean_rows, label_results)
+            presentation_rows = result_builder.build_presentation_rows(clean_rows, label_results, boundary_results)
+            review_pool = result_builder.build_review_pool(clean_rows, label_results, boundary_results)
+            node_summary = result_builder.build_node_summary(statistics_rows)
+            deep_analytics = result_builder.build_deep_analytics(statistics_rows, node_display_map=node_display_map)
 
             self.report_writer.write_all(
                 job=job, rows=raw_rows, clean_rows=clean_rows, label_results=label_results, boundary_results=boundary_results,

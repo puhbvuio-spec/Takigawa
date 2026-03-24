@@ -1,6 +1,0 @@
-﻿node_id,label_frequency,sentiment_distribution,total_effective_hits
-node_story_forum,"{'A1': 1, 'B2': 1}",{'negative': 2},2
-node_map_discussion,{'D3': 1},{'neutral': 1},1
-node_ops_feedback,{'H4': 1},{'negative': 1},1
-node_activity_comment,{'C3': 1},{'positive': 1},1
-node_relic_talk,{'E2': 1},{'negative': 1},1

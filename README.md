@@ -42,7 +42,7 @@
 
 ## 运行方式
 - 规则模式：双击 `run_rule_mode.bat`
-- LLM 模式：双击 `run_llm_mode.bat`
+- LLM 模式：双击 `启动.bat`
 
 ### LLM 模式的 API KEY 要求
 当前仅支持 **通义千问 Coding Plan** 套餐的 API Key（以 `sk-sp-` 开头）。
@@ -51,7 +51,7 @@
 - API 接口：`https://coding.dashscope.aliyuncs.com/v1/chat/completions`
 - 默认模型：`qwen3.5-plus`
 
-`run_llm_mode.bat` 启动时会提示输入 API Key，并校验前缀必须为 `sk-sp-`，不符合则拒绝运行。
+`启动.bat` 运行时会提示输入 API Key，并校验前缀必须为 `sk-sp-`，不符合则拒绝运行。
 
 > **注意：** 其他类型的 DashScope API Key（如 `sk-` 开头的标准套餐密钥）未经测试，暂不提供支持。如确有需要，可在 `PipelineConfig` 中手动指定 `api_base_url`。
 
@@ -89,18 +89,7 @@
 
 > 看板生成为非阻塞步骤：即使生成失败，也不会影响主流程的 JSON/CSV 产出。
 
-当前包还额外提供：
-- `example_output_assets/`：示例 JSON 输出
-- `example_output_reports/`：示例 CSV 输出
-
-## 输出示例说明
-建议先查看以下文件来理解结构：
-- `example_output_assets/sample_output_preview.json`
-- `example_output_assets/statistics_rows.json`
-- `example_output_assets/presentation_rows.json`
-- `example_output_assets/review_pool.json`
-- `example_output_reports/preprocess_overview.csv`
-- `example_output_reports/node_summary.csv`
+可运行示例后在 `data/work/job_xxx/output/` 中查看实际产出。
 
 ## 依赖
 仓库已提供 `requirements.txt`，可直接执行：
@@ -109,7 +98,7 @@
 python -m pip install -r requirements.txt
 ```
 
-建议安装：
+核心依赖：
 - `pandas`
 - `aiohttp`
 - `openpyxl`
