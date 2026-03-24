@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>社区反馈分析看板</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#f5f7fb;color:#1f2d3d;font-family:"Microsoft YaHei","PingFang SC",sans-serif}
+.container{max-width:1440px;margin:0 auto}
+.header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:20px;padding-bottom:14px;border-bottom:3px solid #1f2d3d}
+.header h1{margin:0;font-size:28px;line-height:1.2}
+.sub{color:#68707c;font-size:13px;margin-top:6px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px}
+.grid-2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-bottom:18px}
+.grid-2e{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:18px}
+.card{background:#fff;border-radius:12px;box-shadow:0 4px 18px rgba(31,45,61,.08);padding:18px 18px 16px}
+.kpi-title{font-size:13px;color:#6b7280;margin-bottom:8px}
+.kpi-value{font-size:34px;font-weight:700;line-height:1.1}
+.kpi-sub{margin-top:8px;color:#6b7280;font-size:12px}
+.green{color:#2e8b57}.red{color:#c0392b}.gray{color:#7f8c8d}
+.bar{display:flex;height:18px;border-radius:999px;overflow:hidden;background:#eef1f5;margin-top:10px}
+.bar>div{height:100%}
+.chart-box{height:380px}.chart-box.tall{height:460px}
+.section-title{margin:0 0 12px 0;font-size:16px;font-weight:700}
+.comment{background:#fafbfc;border-left:4px solid #d0d7de;padding:12px;margin-bottom:10px;border-radius:6px;font-size:13px;line-height:1.65}
+.tag{display:inline-block;font-size:11px;color:#fff;padding:2px 8px;border-radius:999px;margin-right:8px;vertical-align:middle}
+.meta{font-size:12px;color:#6b7280}
+.empty-state{color:#9aa3af;font-size:13px;padding:24px 0}
+.quality-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+.quality-item{text-align:center;padding:10px;background:#f9fafb;border-radius:8px}
+.quality-item .num{font-size:22px;font-weight:700;color:#1f2d3d}
+.quality-item .lbl{font-size:12px;color:#6b7280;margin-top:4px}
+@media(max-width:1200px){.grid-4,.grid-3,.grid-2,.grid-2e{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+<div>
+  <h1>社区反馈分析看板</h1>
+  <div class="sub">生成时间：2026-03-24 22:12 | 模式：LLM | 节点数：76</div>
+</div>
+<div class="sub">Community Feedback Pipeline 自动生成</div>
+</div>
+
+<!-- ===== KPI 卡片 ===== -->
+<div class="grid-4">
+<div class="card">
+  <div class="kpi-title">总声量</div>
+  <div class="kpi-value">87</div>
+  <div class="kpi-sub">经清洗后有效评论条数</div>
+</div>
+<div class="card">
+  <div class="kpi-title">净情感值 NSR</div>
+  <div class="kpi-value red">-9.2</div>
+  <div class="kpi-sub">(正面 − 负面) / 总量 × 100</div>
+</div>
+<div class="card">
+  <div class="kpi-title">情感结构</div>
+  <div class="bar">
+    <div style="width:27.6%;background:#2e8b57;" title="正面 27.6%"></div>
+    <div style="width:35.6%;background:#aab2bd;" title="中性 35.6%"></div>
+    <div style="width:36.8%;background:#c0392b;" title="负面 36.8%"></div>
+  </div>
+  <div class="kpi-sub">
+    <span class="green">正面 24 / 27.6%</span> |
+    <span class="gray">中性 31 / 35.6%</span> |
+    <span class="red">负面 32 / 36.8%</span>
+  </div>
+</div>
+<div class="card">
+  <div class="kpi-title">舆情判断</div>
+  <div class="kpi-value red">偏负向</div>
+  <div class="kpi-sub">依据正负向声量对比自动判定</div>
+</div>
+</div>
+
+<!-- ===== 数据质量概览 ===== -->
+<div class="card" style="margin-bottom:18px">
+<h3 class="section-title">数据质量概览</h3>
+<div class="quality-grid">
+  <div class="quality-item"><div class="num">87</div><div class="lbl">清洗后总量</div></div>
+  <div class="quality-item"><div class="num red">4</div><div class="lbl">垃圾/无效</div></div>
+  <div class="quality-item"><div class="num gray">1</div><div class="lbl">近似重复</div></div>
+  <div class="quality-item"><div class="num gray">1</div><div class="lbl">模板内容</div></div>
+</div>
+</div>
+
+<!-- ===== 深度分析模块 ===== -->
+<div class="header" style="margin-top:28px;"><div><h1>深度分析模块</h1><div class="sub">声量指数 · 共识度 · TGI指数 · 四象限偏好地图 · 标签共现网络</div></div></div>
+
+<div class="grid-2e">
+<div class="card"><h3 class="section-title">声量指数排行（情感加权）</h3><div class="sub" style="margin:-8px 0 10px;">声量指数 = (维度评论占比) × 情感均分 | 综合讨论热度与情感倾向</div><div id="voiceIndexChart" class="chart-box tall"></div></div>
+<div class="card"><h3 class="section-title">共识度分析（熵值法）</h3><div class="sub" style="margin:-8px 0 10px;">共识度 = 1 − 信息熵/最大熵 | 越接近1，社群观点越一致</div><div id="consensusChart" class="chart-box tall"></div></div>
+</div>
+
+<div class="card" style="margin-bottom:18px"><h3 class="section-title">四象限偏好地图</h3><div class="sub" style="margin:-8px 0 10px;">X轴 = 关注度(声量占比%) · Y轴 = 满意度(情感均分%) · 气泡大小 = 评论数 · 虚线 = 全局均值</div><div id="quadrantChart" style="height:560px"></div></div>
+
+<div class="grid-2e">
+<div class="card"><h3 class="section-title">TGI 偏好指数（社群纵切）</h3><div class="sub" style="margin:-8px 0 10px;">TGI = (社群正面占比 / 全网正面占比) × 100 | >100 偏好高于均值, <100 低于均值</div><div id="tgiChart" style="height:480px"></div></div>
+<div class="card"><h3 class="section-title">标签共现网络</h3><div class="sub" style="margin:-8px 0 10px;">连线粗细 = 共现频次 | 揭示玩家同时讨论哪些维度</div><div id="cooccurrenceChart" style="height:480px"></div></div>
+</div>
+
+<!-- ===== 负向 Pareto + 治理归因 ===== -->
+<div class="header" style="margin-top:28px;"><div><h1>基础分析模块</h1><div class="sub">问题集中度 · 治理归因 · 高频标签 · 平台分布 · 代表性原声</div></div></div>
+
+<div class="grid-2">
+<div class="card">
+  <h3 class="section-title">负向问题集中度（Pareto）</h3>
+  <div id="paretoChart" class="chart-box"></div>
+</div>
+<div class="card">
+  <h3 class="section-title">负向问题治理归因（一级维度）</h3>
+  <div id="governanceChart" class="chart-box"></div>
+</div>
+</div>
+
+<!-- ===== 标签 Top10（按节点堆叠） ===== -->
+<div class="grid-2e">
+<div class="card">
+  <h3 class="section-title red">高频负向标签 Top 10（按节点分布）</h3>
+  <div class="sub" style="margin:-8px 0 10px;">纵轴 = 标签名 · 颜色 = 观测节点 · 堆叠长度 = 该标签在对应节点的出现频次</div>
+  <div id="negTagChart" class="chart-box tall"></div>
+</div>
+<div class="card">
+  <h3 class="section-title green">高频正向标签 Top 10（按节点分布）</h3>
+  <div class="sub" style="margin:-8px 0 10px;">纵轴 = 标签名 · 颜色 = 观测节点 · 堆叠长度 = 该标签在对应节点的出现频次</div>
+  <div id="posTagChart" class="chart-box tall"></div>
+</div>
+</div>
+
+<!-- ===== 平台分布 ===== -->
+<div class="card" style="margin-bottom:18px">
+  <h3 class="section-title">来源平台分布</h3>
+  <div id="platformChart" class="chart-box"></div>
+</div>
+
+<!-- ===== 代表性原声 ===== -->
+<div class="grid-2e">
+<div class="card">
+  <h3 class="section-title red">负向代表性原声</h3>
+  <div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#c0392b;">剧情叙事/角色出场频率与分布、角色设计/角色强度与平衡</span><span class="meta">NGA | 2026-03-23T10:22:00</span></div><div>玲可戏份少，过了雅利洛6号就没了，她强度也太弱了。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#c0392b;">系统与功能/遗器系统体验</span><span class="meta">Tieba | 2026-03-23T13:50:00</span></div><div>遗器系统真的受苦，歪词条，筛选也难用。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#c0392b;">低价值反馈</span><span class="meta">Weibo | 2026-03-23T16:00:00</span></div><div>看不懂在吹什么。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#c0392b;">剧情叙事/叙事节奏与主线推进</span><span class="meta">Bilibili | 2026-03-23T16:45:00</span></div><div>主线拖沓，信息量大但推进太慢，注水严重。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#c0392b;">角色设计/与世界观契合度</span><span class="meta">NGA | 2026-03-23T17:45:00</span></div><div>这个角色有违和感，不搭世界观，设定太突兀了。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#c0392b;">玩法与战斗/挑战难度合理性</span><span class="meta">Xiaohongshu | 2026-03-23T18:15:00</span></div><div>太难了，恶心机制太多，门槛太高了，没有高练度根本过不了。</div></div>
+</div>
+<div class="card">
+  <h3 class="section-title green">正向代表性原声</h3>
+  <div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#2e8b57;">综合体验/运营沟通与舆情响应</span><span class="meta">Weibo | 2026-03-23T12:40:00</span></div><div>这次回应很快，至少不是继续装死。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#2e8b57;">低价值反馈</span><span class="meta">Bilibili | 2026-03-23T15:10:00</span></div><div>这个是真不错。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#2e8b57;">剧情叙事/角色弧光完整性</span><span class="meta">NGA | 2026-03-23T16:30:00</span></div><div>花火的故事线写得很完整，从头到尾能看到她的成长，弧光很好。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#2e8b57;">玩法与战斗/战斗策略深度、玩法与战斗/队伍搭配多样性</span><span class="meta">Bilibili | 2026-03-23T18:00:00</span></div><div>击破机制有策略深度，行动轴很有意思，配队自由度也高。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#2e8b57;">内容与更新/老内容复用与更新</span><span class="meta">Bilibili | 2026-03-23T19:15:00</span></div><div>旧地图回访体验不错，复用得好，老玩法更新也到位了。</div></div><div class="comment"><div style="margin-bottom:6px;"><span class="tag" style="background:#2e8b57;">视听与艺术/地图场景美术</span><span class="meta">NGA | 2026-03-23T20:15:00</span></div><div>这个星球场景好看，美术很强，视觉震撼，有记忆点。</div></div>
+</div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+const negPareto=[{"标签": "系统与功能/遗器系统体验", "数量": 5, "累计占比": 12.2}, {"标签": "内容与更新/长草期内容填充", "数量": 3, "累计占比": 19.5}, {"标签": "付费与商业/抽卡体验与定价", "数量": 3, "累计占比": 26.8}, {"标签": "付费与商业/皮肤等外观定价", "数量": 3, "累计占比": 34.1}, {"标签": "剧情叙事/支线与活动剧情质量", "数量": 3, "累计占比": 41.5}, {"标签": "综合体验/运营沟通与舆情响应", "数量": 3, "累计占比": 48.8}, {"标签": "剧情叙事/叙事节奏与主线推进", "数量": 2, "累计占比": 53.7}, {"标签": "玩法与战斗/挑战难度合理性", "数量": 2, "累计占比": 58.5}, {"标签": "系统与功能/养成系统舒适度", "数量": 2, "累计占比": 63.4}, {"标签": "综合体验/长期目标与动力", "数量": 2, "累计占比": 68.3}];
+const govRank=[{"分类": "剧情叙事", "数量": 8}, {"分类": "系统与功能", "数量": 8}, {"分类": "付费与商业", "数量": 6}, {"分类": "综合体验", "数量": 6}, {"分类": "玩法与战斗", "数量": 5}, {"分类": "内容与更新", "数量": 3}, {"分类": "角色设计", "数量": 2}, {"分类": "视听与艺术", "数量": 2}, {"分类": "低价值反馈", "数量": 1}];
+const negTagLabels=["系统与功能/遗器系统体验", "内容与更新/长草期内容填充", "付费与商业/抽卡体验与定价", "付费与商业/皮肤等外观定价", "剧情叙事/支线与活动剧情质量", "综合体验/运营沟通与舆情响应", "剧情叙事/叙事节奏与主线推进", "玩法与战斗/挑战难度合理性", "系统与功能/养成系统舒适度", "综合体验/长期目标与动力"];
+const negTagSeries=[{"节点": "AU/穿越向", "数据": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]}, {"节点": "MMD/MME", "数据": [0, 0, 0, 0, 0, 0, 0, 0, 1, 0]}, {"节点": "OC类", "数据": [0, 0, 0, 0, 0, 0, 0, 1, 0, 0]}, {"节点": "专题网页", "数据": [0, 0, 0, 0, 1, 1, 1, 0, 0, 0]}, {"节点": "实机剧情录制", "数据": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]}, {"节点": "实机摄影", "数据": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "描改类", "数据": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]}, {"节点": "整活向", "数据": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "新版本介绍", "数据": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]}, {"节点": "新角色情感连结", "数据": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "社区动态梳理", "数据": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]}, {"节点": "立场导向团体", "数据": [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "线下活动情报同步", "数据": [0, 1, 0, 0, 0, 0, 0, 0, 1, 0]}, {"节点": "翁法罗斯纪行录系列", "数据": [1, 0, 0, 1, 1, 0, 0, 1, 0, 0]}, {"节点": "角色IP做AI素材", "数据": [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "角色印象/展示", "数据": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "释放活动玩法焦点", "数据": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "释放角色焦点", "数据": [0, 0, 0, 0, 0, 0, 1, 0, 0, 0]}, {"节点": "重返群星之旅系列导流", "数据": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]}, {"节点": "预曝光期", "数据": [1, 0, 1, 0, 0, 1, 0, 0, 0, 0]}];
+const posTagLabels=["玩法与战斗/战斗策略深度", "低价值反馈", "剧情叙事/角色弧光完整性", "综合体验/运营沟通与舆情响应", "综合体验/世界观沉浸感", "角色设计/角色外观设计", "剧情叙事/叙事节奏与主线推进", "内容与更新/新星球/地图探索体验", "玩法与战斗/队伍搭配多样性", "内容与更新/老内容复用与更新"];
+const posTagSeries=[{"节点": "“痛包”设计展示", "数据": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]}, {"节点": "优质二创统宣", "数据": [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]}, {"节点": "兴趣导向团体", "数据": [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "利益诉求驱动", "数据": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "反对团体", "数据": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]}, {"节点": "星铁情报", "数据": [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "深渊挑战/看号实况", "数据": [1, 0, 0, 0, 0, 0, 0, 0, 1, 0]}, {"节点": "游戏/创作实况", "数据": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "爆点情报排期预告", "数据": [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]}, {"节点": "线下活动情报同步", "数据": [1, 0, 1, 0, 0, 0, 1, 1, 0, 0]}, {"节点": "翁法罗斯纪行录系列", "数据": [1, 0, 1, 0, 0, 0, 1, 1, 0, 0]}, {"节点": "舞蹈演绎", "数据": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]}, {"节点": "角色印象/展示", "数据": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]}, {"节点": "设定图/概念图", "数据": [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]}, {"节点": "部分个人势KOL及其粉丝", "数据": [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]}];
+const platformData=[{"平台": "NGA", "数量": 25}, {"平台": "Bilibili", "数量": 20}, {"平台": "Weibo", "数量": 15}, {"平台": "Tieba", "数量": 15}, {"平台": "Xiaohongshu", "数量": 10}, {"平台": "Forum", "数量": 2}];
+
+/* Pareto */
+const pc=echarts.init(document.getElementById('paretoChart'));
+pc.setOption({
+  tooltip:{trigger:'axis'},legend:{data:['负向数量','累计占比']},
+  grid:{left:'8%',right:'8%',bottom:'14%',containLabel:true},
+  xAxis:{type:'category',data:negPareto.map(x=>x['标签']),axisLabel:{interval:0,rotate:35}},
+  yAxis:[{type:'value',name:'数量'},{type:'value',name:'累计占比',min:0,max:100,axisLabel:{formatter:'{value}%'}}],
+  series:[
+    {name:'负向数量',type:'bar',data:negPareto.map(x=>x['数量']),itemStyle:{color:'#c0392b'}},
+    {name:'累计占比',type:'line',yAxisIndex:1,smooth:true,data:negPareto.map(x=>x['累计占比']),itemStyle:{color:'#1f2d3d'},label:{show:true,formatter:'{c}%'}}
+  ]
+});
+
+/* 治理归因 */
+const gc=echarts.init(document.getElementById('governanceChart'));
+gc.setOption({
+  tooltip:{trigger:'item'},
+  series:[{type:'pie',radius:['35%','68%'],center:['50%','52%'],
+    label:{formatter:'{b}\n{d}%'},
+    data:govRank.map(x=>({name:x['分类'],value:x['数量']}))
+  }]
+});
+
+/* 负向标签（按节点堆叠） */
+const NEG_NODE_COLORS=['#c0392b','#e74c3c','#f39c12','#e67e22','#8e44ad','#2c3e50','#16a085','#d35400','#7f8c8d','#2980b9','#1abc9c','#9b59b6'];
+const nc=echarts.init(document.getElementById('negTagChart'));
+nc.setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+  legend:{data:negTagSeries.map(x=>x['节点']),top:0,type:'scroll',textStyle:{fontSize:11}},
+  grid:{left:'40%',right:'8%',top:'30',bottom:'3%',containLabel:false},
+  xAxis:{type:'value',name:'频次'},
+  yAxis:{type:'category',data:negTagLabels.slice().reverse()},
+  series:negTagSeries.map(function(s,i){
+    return {
+      name:s['节点'],type:'bar',stack:'neg_total',
+      data:s['数据'].slice().reverse(),
+      label:{show:false},
+      itemStyle:{color:NEG_NODE_COLORS[i%NEG_NODE_COLORS.length]},
+      emphasis:{focus:'series'}
+    };
+  })
+});
+
+/* 正向标签（按节点堆叠） */
+const POS_NODE_COLORS=['#2e8b57','#27ae60','#3498db','#2980b9','#1abc9c','#16a085','#f1c40f','#e67e22','#9b59b6','#34495e','#95a5a6','#d35400'];
+const ptc=echarts.init(document.getElementById('posTagChart'));
+ptc.setOption({
+  tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+  legend:{data:posTagSeries.map(x=>x['节点']),top:0,type:'scroll',textStyle:{fontSize:11}},
+  grid:{left:'40%',right:'8%',top:'30',bottom:'3%',containLabel:false},
+  xAxis:{type:'value',name:'频次'},
+  yAxis:{type:'category',data:posTagLabels.slice().reverse()},
+  series:posTagSeries.map(function(s,i){
+    return {
+      name:s['节点'],type:'bar',stack:'pos_total',
+      data:s['数据'].slice().reverse(),
+      label:{show:false},
+      itemStyle:{color:POS_NODE_COLORS[i%POS_NODE_COLORS.length]},
+      emphasis:{focus:'series'}
+    };
+  })
+});
+
+/* 平台分布 */
+const plc=echarts.init(document.getElementById('platformChart'));
+plc.setOption({
+  tooltip:{trigger:'item'},
+  series:[{type:'pie',radius:['35%','68%'],center:['50%','52%'],
+    label:{formatter:'{b}\n{c}条 ({d}%)'},
+    data:platformData.map(x=>({name:x['平台'],value:x['数量']}))
+  }]
+});
+
+window.addEventListener('resize',function(){pc.resize();gc.resize();nc.resize();ptc.resize();plc.resize()});
+
+/* ===== 深度分析图表 ===== */
+const voiceData=[{"label_id": "C1", "level_1": "玩法与战斗", "level_2": "战斗策略深度", "display": "玩法与战斗/战斗策略深度", "count": 5, "volume_share": 0.0549, "avg_sentiment_score": 0.8, "voice_index": 0.044}, {"label_id": "D3", "level_1": "内容与更新", "level_2": "新星球/地图探索体验", "display": "内容与更新/新星球/地图探索体验", "count": 4, "volume_share": 0.044, "avg_sentiment_score": 0.75, "voice_index": 0.033}, {"label_id": "A2", "level_1": "剧情叙事", "level_2": "角色弧光完整性", "display": "剧情叙事/角色弧光完整性", "count": 3, "volume_share": 0.033, "avg_sentiment_score": 1.0, "voice_index": 0.033}, {"label_id": "B1", "level_1": "角色设计", "level_2": "角色外观设计", "display": "角色设计/角色外观设计", "count": 3, "volume_share": 0.033, "avg_sentiment_score": 0.8333, "voice_index": 0.0275}, {"label_id": "H4", "level_1": "综合体验", "level_2": "运营沟通与舆情响应", "display": "综合体验/运营沟通与舆情响应", "count": 5, "volume_share": 0.0549, "avg_sentiment_score": 0.4, "voice_index": 0.022}, {"label_id": "A5", "level_1": "剧情叙事", "level_2": "叙事节奏与主线推进", "display": "剧情叙事/叙事节奏与主线推进", "count": 4, "volume_share": 0.044, "avg_sentiment_score": 0.5, "voice_index": 0.022}, {"label_id": "G1", "level_1": "付费与商业", "level_2": "抽卡体验与定价", "display": "付费与商业/抽卡体验与定价", "count": 6, "volume_share": 0.0659, "avg_sentiment_score": 0.3333, "voice_index": 0.022}, {"label_id": "G3", "level_1": "付费与商业", "level_2": "大月卡/小月卡价值", "display": "付费与商业/大月卡/小月卡价值", "count": 3, "volume_share": 0.033, "avg_sentiment_score": 0.6667, "voice_index": 0.022}, {"label_id": "H1", "level_1": "综合体验", "level_2": "世界观沉浸感", "display": "综合体验/世界观沉浸感", "count": 2, "volume_share": 0.022, "avg_sentiment_score": 1.0, "voice_index": 0.022}, {"label_id": "D1", "level_1": "内容与更新", "level_2": "版本更新规模与质量", "display": "内容与更新/版本更新规模与质量", "count": 2, "volume_share": 0.022, "avg_sentiment_score": 0.75, "voice_index": 0.0165}, {"label_id": "G4", "level_1": "付费与商业", "level_2": "皮肤等外观定价", "display": "付费与商业/皮肤等外观定价", "count": 5, "volume_share": 0.0549, "avg_sentiment_score": 0.3, "voice_index": 0.0165}, {"label_id": "H3", "level_1": "综合体验", "level_2": "新手/回坑体验", "display": "综合体验/新手/回坑体验", "count": 3, "volume_share": 0.033, "avg_sentiment_score": 0.5, "voice_index": 0.0165}, {"label_id": "A6", "level_1": "剧情叙事", "level_2": "支线与活动剧情质量", "display": "剧情叙事/支线与活动剧情质量", "count": 5, "volume_share": 0.0549, "avg_sentiment_score": 0.3, "voice_index": 0.0165}, {"label_id": "B2", "level_1": "角色设计", "level_2": "角色强度与平衡", "display": "角色设计/角色强度与平衡", "count": 2, "volume_share": 0.022, "avg_sentiment_score": 0.5, "voice_index": 0.011}, {"label_id": "C3", "level_1": "玩法与战斗", "level_2": "版本活动玩法趣味性", "display": "玩法与战斗/版本活动玩法趣味性", "count": 2, "volume_share": 0.022, "avg_sentiment_score": 0.5, "voice_index": 0.011}, {"label_id": "A7", "level_1": "剧情叙事", "level_2": "叙事演出表现", "display": "剧情叙事/叙事演出表现", "count": 2, "volume_share": 0.022, "avg_sentiment_score": 0.5, "voice_index": 0.011}, {"label_id": "C2", "level_1": "玩法与战斗", "level_2": "队伍搭配多样性", "display": "玩法与战斗/队伍搭配多样性", "count": 2, "volume_share": 0.022, "avg_sentiment_score": 0.5, "voice_index": 0.011}, {"label_id": "D4", "level_1": "内容与更新", "level_2": "老内容复用与更新", "display": "内容与更新/老内容复用与更新", "count": 1, "volume_share": 0.011, "avg_sentiment_score": 1.0, "voice_index": 0.011}, {"label_id": "E1", "level_1": "系统与功能", "level_2": "养成系统舒适度", "display": "系统与功能/养成系统舒适度", "count": 3, "volume_share": 0.033, "avg_sentiment_score": 0.3333, "voice_index": 0.011}, {"label_id": "E3", "level_1": "系统与功能", "level_2": "用户界面与交互", "display": "系统与功能/用户界面与交互", "count": 2, "volume_share": 0.022, "avg_sentiment_score": 0.5, "voice_index": 0.011}];
+const consensusData=[{"label_id": "H3", "display": "综合体验/新手/回坑体验", "count": 3, "positive_count": 1, "neutral_count": 1, "negative_count": 1, "entropy": 1.585, "consensus": 0.0}, {"label_id": "G1", "display": "付费与商业/抽卡体验与定价", "count": 6, "positive_count": 1, "neutral_count": 2, "negative_count": 3, "entropy": 1.4591, "consensus": 0.0794}, {"label_id": "G4", "display": "付费与商业/皮肤等外观定价", "count": 5, "positive_count": 1, "neutral_count": 1, "negative_count": 3, "entropy": 1.371, "consensus": 0.135}, {"label_id": "A6", "display": "剧情叙事/支线与活动剧情质量", "count": 5, "positive_count": 1, "neutral_count": 1, "negative_count": 3, "entropy": 1.371, "consensus": 0.135}, {"label_id": "B2", "display": "角色设计/角色强度与平衡", "count": 2, "positive_count": 1, "neutral_count": 0, "negative_count": 1, "entropy": 1.0, "consensus": 0.3691}, {"label_id": "D3", "display": "内容与更新/新星球/地图探索体验", "count": 4, "positive_count": 2, "neutral_count": 2, "negative_count": 0, "entropy": 1.0, "consensus": 0.3691}, {"label_id": "A5", "display": "剧情叙事/叙事节奏与主线推进", "count": 4, "positive_count": 2, "neutral_count": 0, "negative_count": 2, "entropy": 1.0, "consensus": 0.3691}, {"label_id": "C2", "display": "玩法与战斗/队伍搭配多样性", "count": 2, "positive_count": 1, "neutral_count": 0, "negative_count": 1, "entropy": 1.0, "consensus": 0.3691}, {"label_id": "D1", "display": "内容与更新/版本更新规模与质量", "count": 2, "positive_count": 1, "neutral_count": 1, "negative_count": 0, "entropy": 1.0, "consensus": 0.3691}, {"label_id": "E3", "display": "系统与功能/用户界面与交互", "count": 2, "positive_count": 1, "neutral_count": 0, "negative_count": 1, "entropy": 1.0, "consensus": 0.3691}, {"label_id": "F1", "display": "视听与艺术/地图场景美术", "count": 2, "positive_count": 1, "neutral_count": 0, "negative_count": 1, "entropy": 1.0, "consensus": 0.3691}, {"label_id": "A4", "display": "剧情叙事/历史回访与记忆连接", "count": 2, "positive_count": 1, "neutral_count": 0, "negative_count": 1, "entropy": 1.0, "consensus": 0.3691}, {"label_id": "H4", "display": "综合体验/运营沟通与舆情响应", "count": 5, "positive_count": 2, "neutral_count": 0, "negative_count": 3, "entropy": 0.971, "consensus": 0.3874}, {"label_id": "B1", "display": "角色设计/角色外观设计", "count": 3, "positive_count": 2, "neutral_count": 1, "negative_count": 0, "entropy": 0.9183, "consensus": 0.4206}, {"label_id": "E1", "display": "系统与功能/养成系统舒适度", "count": 3, "positive_count": 1, "neutral_count": 0, "negative_count": 2, "entropy": 0.9183, "consensus": 0.4206}, {"label_id": "G3", "display": "付费与商业/大月卡/小月卡价值", "count": 3, "positive_count": 1, "neutral_count": 2, "negative_count": 0, "entropy": 0.9183, "consensus": 0.4206}, {"label_id": "D2", "display": "内容与更新/长草期内容填充", "count": 4, "positive_count": 0, "neutral_count": 1, "negative_count": 3, "entropy": 0.8113, "consensus": 0.4881}, {"label_id": "C1", "display": "玩法与战斗/战斗策略深度", "count": 5, "positive_count": 4, "neutral_count": 0, "negative_count": 1, "entropy": 0.7219, "consensus": 0.5445}, {"label_id": "E2", "display": "系统与功能/遗器系统体验", "count": 6, "positive_count": 0, "neutral_count": 1, "negative_count": 5, "entropy": 0.65, "consensus": 0.5899}, {"label_id": "A1", "display": "剧情叙事/角色出场频率与分布", "count": 1, "positive_count": 0, "neutral_count": 0, "negative_count": 1, "entropy": 0.0, "consensus": 1.0}];
+const tgiData=[{"node_id": "ID_8a3c54f3-9678-4915-9849-51b2862a4f2c", "node_display": "实机剧情录制", "label_id": "G1", "display": "付费与商业/抽卡体验与定价", "node_positive_ratio": 100.0, "global_positive_ratio": 16.7, "tgi": 600.0, "node_count": 1}, {"node_id": "ID_a662f993-ec71-43b2-840b-46cbb196c199", "node_display": "日常向", "label_id": "G4", "display": "付费与商业/皮肤等外观定价", "node_positive_ratio": 100.0, "global_positive_ratio": 20.0, "tgi": 500.0, "node_count": 1}, {"node_id": "ID_7fd70e99-1f58-49a2-9d07-1ab91ee0ae46", "node_display": "表情包制作/传播", "label_id": "A6", "display": "剧情叙事/支线与活动剧情质量", "node_positive_ratio": 100.0, "global_positive_ratio": 20.0, "tgi": 500.0, "node_count": 1}, {"node_id": "ID_967c3861-a090-43f8-b048-c250d62fa875", "node_display": "立场导向团体", "label_id": "E1", "display": "系统与功能/养成系统舒适度", "node_positive_ratio": 100.0, "global_positive_ratio": 33.3, "tgi": 300.0, "node_count": 1}, {"node_id": "ID_197cf6ba-729d-4ed5-a81c-9db9255c76e8", "node_display": "CP向", "label_id": "H3", "display": "综合体验/新手/回坑体验", "node_positive_ratio": 100.0, "global_positive_ratio": 33.3, "tgi": 300.0, "node_count": 1}, {"node_id": "ID_52f78f6b-ac14-44da-8923-1c96eba3979f", "node_display": "翁法罗斯纪行录系列", "label_id": "G3", "display": "付费与商业/大月卡/小月卡价值", "node_positive_ratio": 100.0, "global_positive_ratio": 33.3, "tgi": 300.0, "node_count": 1}, {"node_id": "ID_10840ed5-c3d6-4839-a10f-e845a86ab3df", "node_display": "“痛包”设计展示", "label_id": "H4", "display": "综合体验/运营沟通与舆情响应", "node_positive_ratio": 100.0, "global_positive_ratio": 40.0, "tgi": 250.0, "node_count": 1}, {"node_id": "ID_79925af0-49a5-42ac-93ba-1d75a32db553", "node_display": "优质二创统宣", "label_id": "H4", "display": "综合体验/运营沟通与舆情响应", "node_positive_ratio": 100.0, "global_positive_ratio": 40.0, "tgi": 250.0, "node_count": 1}, {"node_id": "ID_10840ed5-c3d6-4839-a10f-e845a86ab3df", "node_display": "“痛包”设计展示", "label_id": "F1", "display": "视听与艺术/地图场景美术", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_23579a795df03145", "node_display": "深渊挑战/看号实况", "label_id": "C2", "display": "玩法与战斗/队伍搭配多样性", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_8a3c54f3-9678-4915-9849-51b2862a4f2c", "node_display": "实机剧情录制", "label_id": "A4", "display": "剧情叙事/历史回访与记忆连接", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_5227fa46-17fa-4592-b16e-f7f3961c0e75", "node_display": "释放版本焦点", "label_id": "B2", "display": "角色设计/角色强度与平衡", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_23f820b7-a865-496c-be30-84c86b30ba24", "node_display": "H5活动导流", "label_id": "E3", "display": "系统与功能/用户界面与交互", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_8b8987dc-3b60-4579-b320-6d1bc68e6c4b", "node_display": "角色衍生", "label_id": "D1", "display": "内容与更新/版本更新规模与质量", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_56158c24-775f-491c-97a5-8f72b2d5c19e", "node_display": "线下活动情报同步", "label_id": "A5", "display": "剧情叙事/叙事节奏与主线推进", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_56158c24-775f-491c-97a5-8f72b2d5c19e", "node_display": "线下活动情报同步", "label_id": "D3", "display": "内容与更新/新星球/地图探索体验", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_52f78f6b-ac14-44da-8923-1c96eba3979f", "node_display": "翁法罗斯纪行录系列", "label_id": "A5", "display": "剧情叙事/叙事节奏与主线推进", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_52f78f6b-ac14-44da-8923-1c96eba3979f", "node_display": "翁法罗斯纪行录系列", "label_id": "D3", "display": "内容与更新/新星球/地图探索体验", "node_positive_ratio": 100.0, "global_positive_ratio": 50.0, "tgi": 200.0, "node_count": 1}, {"node_id": "ID_b8be656d-0fe5-42fb-bb2f-994e7abf42be", "node_display": "反对团体", "label_id": "B1", "display": "角色设计/角色外观设计", "node_positive_ratio": 100.0, "global_positive_ratio": 66.7, "tgi": 150.0, "node_count": 1}, {"node_id": "ID_13068f1f-85ea-49e4-9625-4d7402f77439", "node_display": "部分个人势KOL及其粉丝", "label_id": "B1", "display": "角色设计/角色外观设计", "node_positive_ratio": 100.0, "global_positive_ratio": 66.7, "tgi": 150.0, "node_count": 1}, {"node_id": "ID_23579a795df03145", "node_display": "深渊挑战/看号实况", "label_id": "C1", "display": "玩法与战斗/战斗策略深度", "node_positive_ratio": 100.0, "global_positive_ratio": 80.0, "tgi": 125.0, "node_count": 1}, {"node_id": "ID_56158c24-775f-491c-97a5-8f72b2d5c19e", "node_display": "线下活动情报同步", "label_id": "C1", "display": "玩法与战斗/战斗策略深度", "node_positive_ratio": 100.0, "global_positive_ratio": 80.0, "tgi": 125.0, "node_count": 1}, {"node_id": "ID_52f78f6b-ac14-44da-8923-1c96eba3979f", "node_display": "翁法罗斯纪行录系列", "label_id": "C1", "display": "玩法与战斗/战斗策略深度", "node_positive_ratio": 100.0, "global_positive_ratio": 80.0, "tgi": 125.0, "node_count": 1}, {"node_id": "ID_15b29bdf2704a46b", "node_display": "游戏/创作实况", "label_id": "C1", "display": "玩法与战斗/战斗策略深度", "node_positive_ratio": 100.0, "global_positive_ratio": 80.0, "tgi": 125.0, "node_count": 1}, {"node_id": "ID_20b2653a-88dc-41f0-aa5a-edf12bf8538b", "node_display": "利益诉求驱动", "label_id": "A2", "display": "剧情叙事/角色弧光完整性", "node_positive_ratio": 100.0, "global_positive_ratio": 100.0, "tgi": 100.0, "node_count": 1}, {"node_id": "ID_8fd9549f-6626-4100-b677-f40dff2031b1", "node_display": "角色印象/展示", "label_id": "D4", "display": "内容与更新/老内容复用与更新", "node_positive_ratio": 100.0, "global_positive_ratio": 100.0, "tgi": 100.0, "node_count": 1}, {"node_id": "ID_591e2462-6611-4800-ac0f-821fe8f05987", "node_display": "角色印象/展示", "label_id": "F3", "display": "视听与艺术/音乐与音效", "node_positive_ratio": 100.0, "global_positive_ratio": 100.0, "tgi": 100.0, "node_count": 1}, {"node_id": "ID_13dca892-6177-45d5-93d9-6b7856606bc6", "node_display": "设定图/概念图", "label_id": "H1", "display": "综合体验/世界观沉浸感", "node_positive_ratio": 100.0, "global_positive_ratio": 100.0, "tgi": 100.0, "node_count": 1}, {"node_id": "ID_4e2982fd-ca0a-4fa1-88f5-4c0647a4fbed", "node_display": "释放优化焦点", "label_id": "B4", "display": "角色设计/人设独特性与魅力", "node_positive_ratio": 100.0, "global_positive_ratio": 100.0, "tgi": 100.0, "node_count": 1}, {"node_id": "ID_56158c24-775f-491c-97a5-8f72b2d5c19e", "node_display": "线下活动情报同步", "label_id": "A2", "display": "剧情叙事/角色弧光完整性", "node_positive_ratio": 100.0, "global_positive_ratio": 100.0, "tgi": 100.0, "node_count": 1}];
+const quadrantData=[{"label_id": "A1", "display": "剧情叙事/角色出场频率与分布", "level_1": "剧情叙事", "x_volume_share": 1.1, "y_sentiment_score": 0.0, "count": 1, "consensus": 1.0}, {"label_id": "B2", "display": "角色设计/角色强度与平衡", "level_1": "角色设计", "x_volume_share": 2.2, "y_sentiment_score": 50.0, "count": 2, "consensus": 0.3691}, {"label_id": "D3", "display": "内容与更新/新星球/地图探索体验", "level_1": "内容与更新", "x_volume_share": 4.4, "y_sentiment_score": 75.0, "count": 4, "consensus": 0.3691}, {"label_id": "H4", "display": "综合体验/运营沟通与舆情响应", "level_1": "综合体验", "x_volume_share": 5.49, "y_sentiment_score": 40.0, "count": 5, "consensus": 0.3874}, {"label_id": "C3", "display": "玩法与战斗/版本活动玩法趣味性", "level_1": "玩法与战斗", "x_volume_share": 2.2, "y_sentiment_score": 50.0, "count": 2, "consensus": 1.0}, {"label_id": "E2", "display": "系统与功能/遗器系统体验", "level_1": "系统与功能", "x_volume_share": 6.59, "y_sentiment_score": 8.33, "count": 6, "consensus": 0.5899}, {"label_id": "A2", "display": "剧情叙事/角色弧光完整性", "level_1": "剧情叙事", "x_volume_share": 3.3, "y_sentiment_score": 100.0, "count": 3, "consensus": 1.0}, {"label_id": "A5", "display": "剧情叙事/叙事节奏与主线推进", "level_1": "剧情叙事", "x_volume_share": 4.4, "y_sentiment_score": 50.0, "count": 4, "consensus": 0.3691}, {"label_id": "A7", "display": "剧情叙事/叙事演出表现", "level_1": "剧情叙事", "x_volume_share": 2.2, "y_sentiment_score": 50.0, "count": 2, "consensus": 1.0}, {"label_id": "B1", "display": "角色设计/角色外观设计", "level_1": "角色设计", "x_volume_share": 3.3, "y_sentiment_score": 83.33, "count": 3, "consensus": 0.4206}, {"label_id": "B3", "display": "角色设计/机制趣味性与独特性", "level_1": "角色设计", "x_volume_share": 1.1, "y_sentiment_score": 50.0, "count": 1, "consensus": 1.0}, {"label_id": "B5", "display": "角色设计/与世界观契合度", "level_1": "角色设计", "x_volume_share": 1.1, "y_sentiment_score": 0.0, "count": 1, "consensus": 1.0}, {"label_id": "C1", "display": "玩法与战斗/战斗策略深度", "level_1": "玩法与战斗", "x_volume_share": 5.49, "y_sentiment_score": 80.0, "count": 5, "consensus": 0.5445}, {"label_id": "C2", "display": "玩法与战斗/队伍搭配多样性", "level_1": "玩法与战斗", "x_volume_share": 2.2, "y_sentiment_score": 50.0, "count": 2, "consensus": 0.3691}, {"label_id": "C4", "display": "玩法与战斗/挑战难度合理性", "level_1": "玩法与战斗", "x_volume_share": 2.2, "y_sentiment_score": 0.0, "count": 2, "consensus": 1.0}, {"label_id": "C5", "display": "玩法与战斗/自动化/速刷体验", "level_1": "玩法与战斗", "x_volume_share": 1.1, "y_sentiment_score": 0.0, "count": 1, "consensus": 1.0}, {"label_id": "D1", "display": "内容与更新/版本更新规模与质量", "level_1": "内容与更新", "x_volume_share": 2.2, "y_sentiment_score": 75.0, "count": 2, "consensus": 0.3691}, {"label_id": "D2", "display": "内容与更新/长草期内容填充", "level_1": "内容与更新", "x_volume_share": 4.4, "y_sentiment_score": 12.5, "count": 4, "consensus": 0.4881}, {"label_id": "D4", "display": "内容与更新/老内容复用与更新", "level_1": "内容与更新", "x_volume_share": 1.1, "y_sentiment_score": 100.0, "count": 1, "consensus": 1.0}, {"label_id": "E1", "display": "系统与功能/养成系统舒适度", "level_1": "系统与功能", "x_volume_share": 3.3, "y_sentiment_score": 33.33, "count": 3, "consensus": 0.4206}, {"label_id": "E3", "display": "系统与功能/用户界面与交互", "level_1": "系统与功能", "x_volume_share": 2.2, "y_sentiment_score": 50.0, "count": 2, "consensus": 0.3691}, {"label_id": "E4", "display": "系统与功能/社交系统体验", "level_1": "系统与功能", "x_volume_share": 1.1, "y_sentiment_score": 50.0, "count": 1, "consensus": 1.0}, {"label_id": "F1", "display": "视听与艺术/地图场景美术", "level_1": "视听与艺术", "x_volume_share": 2.2, "y_sentiment_score": 50.0, "count": 2, "consensus": 0.3691}, {"label_id": "F2", "display": "视听与艺术/角色与怪物建模", "level_1": "视听与艺术", "x_volume_share": 1.1, "y_sentiment_score": 0.0, "count": 1, "consensus": 1.0}, {"label_id": "F3", "display": "视听与艺术/音乐与音效", "level_1": "视听与艺术", "x_volume_share": 1.1, "y_sentiment_score": 100.0, "count": 1, "consensus": 1.0}, {"label_id": "G1", "display": "付费与商业/抽卡体验与定价", "level_1": "付费与商业", "x_volume_share": 6.59, "y_sentiment_score": 33.33, "count": 6, "consensus": 0.0794}, {"label_id": "G3", "display": "付费与商业/大月卡/小月卡价值", "level_1": "付费与商业", "x_volume_share": 3.3, "y_sentiment_score": 66.67, "count": 3, "consensus": 0.4206}, {"label_id": "G4", "display": "付费与商业/皮肤等外观定价", "level_1": "付费与商业", "x_volume_share": 5.49, "y_sentiment_score": 30.0, "count": 5, "consensus": 0.135}, {"label_id": "H1", "display": "综合体验/世界观沉浸感", "level_1": "综合体验", "x_volume_share": 2.2, "y_sentiment_score": 100.0, "count": 2, "consensus": 1.0}, {"label_id": "H2", "display": "综合体验/长期目标与动力", "level_1": "综合体验", "x_volume_share": 2.2, "y_sentiment_score": 0.0, "count": 2, "consensus": 1.0}, {"label_id": "H3", "display": "综合体验/新手/回坑体验", "level_1": "综合体验", "x_volume_share": 3.3, "y_sentiment_score": 50.0, "count": 3, "consensus": 0.0}, {"label_id": "A3", "display": "剧情叙事/区域剧情均衡性", "level_1": "剧情叙事", "x_volume_share": 1.1, "y_sentiment_score": 0.0, "count": 1, "consensus": 1.0}, {"label_id": "A4", "display": "剧情叙事/历史回访与记忆连接", "level_1": "剧情叙事", "x_volume_share": 2.2, "y_sentiment_score": 50.0, "count": 2, "consensus": 0.3691}, {"label_id": "A6", "display": "剧情叙事/支线与活动剧情质量", "level_1": "剧情叙事", "x_volume_share": 5.49, "y_sentiment_score": 30.0, "count": 5, "consensus": 0.135}, {"label_id": "B4", "display": "角色设计/人设独特性与魅力", "level_1": "角色设计", "x_volume_share": 1.1, "y_sentiment_score": 100.0, "count": 1, "consensus": 1.0}];
+const quadrantCenter={"x": 2.86, "y": 46.21};
+const cooccurrenceData=[{"source": "付费与商业/抽卡体验与定价", "source_id": "G1", "target": "付费与商业/皮肤等外观定价", "target_id": "G4", "weight": 2}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "剧情叙事/叙事节奏与主线推进", "target_id": "A5", "weight": 2}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "玩法与战斗/战斗策略深度", "target_id": "C1", "weight": 2}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "内容与更新/新星球/地图探索体验", "target_id": "D3", "weight": 2}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "玩法与战斗/战斗策略深度", "target_id": "C1", "weight": 2}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "内容与更新/新星球/地图探索体验", "target_id": "D3", "weight": 2}, {"source": "玩法与战斗/战斗策略深度", "source_id": "C1", "target": "内容与更新/新星球/地图探索体验", "target_id": "D3", "weight": 2}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "剧情叙事/支线与活动剧情质量", "target_id": "A6", "weight": 2}, {"source": "付费与商业/大月卡/小月卡价值", "source_id": "G3", "target": "付费与商业/皮肤等外观定价", "target_id": "G4", "weight": 2}, {"source": "剧情叙事/角色出场频率与分布", "source_id": "A1", "target": "角色设计/角色强度与平衡", "target_id": "B2", "weight": 1}, {"source": "玩法与战斗/战斗策略深度", "source_id": "C1", "target": "玩法与战斗/队伍搭配多样性", "target_id": "C2", "weight": 1}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "内容与更新/长草期内容填充", "target_id": "D2", "weight": 1}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "系统与功能/养成系统舒适度", "target_id": "E1", "weight": 1}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "内容与更新/长草期内容填充", "target_id": "D2", "weight": 1}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "系统与功能/养成系统舒适度", "target_id": "E1", "weight": 1}, {"source": "玩法与战斗/战斗策略深度", "source_id": "C1", "target": "内容与更新/长草期内容填充", "target_id": "D2", "weight": 1}, {"source": "玩法与战斗/战斗策略深度", "source_id": "C1", "target": "系统与功能/养成系统舒适度", "target_id": "E1", "weight": 1}, {"source": "内容与更新/长草期内容填充", "source_id": "D2", "target": "内容与更新/新星球/地图探索体验", "target_id": "D3", "weight": 1}, {"source": "内容与更新/新星球/地图探索体验", "source_id": "D3", "target": "系统与功能/养成系统舒适度", "target_id": "E1", "weight": 1}, {"source": "内容与更新/长草期内容填充", "source_id": "D2", "target": "系统与功能/养成系统舒适度", "target_id": "E1", "weight": 1}, {"source": "剧情叙事/支线与活动剧情质量", "source_id": "A6", "target": "玩法与战斗/版本活动玩法趣味性", "target_id": "C3", "weight": 1}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "玩法与战斗/挑战难度合理性", "target_id": "C4", "weight": 1}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "系统与功能/遗器系统体验", "target_id": "E2", "weight": 1}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "付费与商业/大月卡/小月卡价值", "target_id": "G3", "weight": 1}, {"source": "剧情叙事/叙事节奏与主线推进", "source_id": "A5", "target": "付费与商业/皮肤等外观定价", "target_id": "G4", "weight": 1}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "剧情叙事/支线与活动剧情质量", "target_id": "A6", "weight": 1}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "玩法与战斗/挑战难度合理性", "target_id": "C4", "weight": 1}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "系统与功能/遗器系统体验", "target_id": "E2", "weight": 1}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "付费与商业/大月卡/小月卡价值", "target_id": "G3", "weight": 1}, {"source": "剧情叙事/角色弧光完整性", "source_id": "A2", "target": "付费与商业/皮肤等外观定价", "target_id": "G4", "weight": 1}];
+
+const deepCharts=[];
+
+if(voiceData.length>0 && document.getElementById('voiceIndexChart')){
+  const vic=echarts.init(document.getElementById('voiceIndexChart'));
+  deepCharts.push(vic);
+  const viLabels=voiceData.map(x=>x.display).reverse();
+  const viValues=voiceData.map(x=>x.voice_index).reverse();
+  const viCounts=voiceData.map(x=>x.count).reverse();
+  const viScores=voiceData.map(x=>x.avg_sentiment_score).reverse();
+  vic.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},
+      formatter:function(p){
+        const i=p[0].dataIndex;
+        return '<b>'+viLabels[i]+'</b><br/>声量指数: '+viValues[i]+'<br/>评论数: '+viCounts[i]+'<br/>情感均分: '+viScores[i];
+      }
+    },
+    grid:{left:'40%',right:'10%',top:'3%',bottom:'3%',containLabel:false},
+    xAxis:{type:'value',name:'声量指数'},
+    yAxis:{type:'category',data:viLabels},
+    series:[{
+      type:'bar',data:viValues.map((v,i)=>({
+        value:v,
+        itemStyle:{color:viScores[i]>=0.6?'#2e8b57':viScores[i]>=0.4?'#aab2bd':'#c0392b'}
+      })),
+      label:{show:true,position:'right',formatter:function(p){return p.value.toFixed(4)}}
+    }]
+  });
+}
+
+if(consensusData.length>0 && document.getElementById('consensusChart')){
+  const csc=echarts.init(document.getElementById('consensusChart'));
+  deepCharts.push(csc);
+  const csLabels=consensusData.map(x=>x.display);
+  const csValues=consensusData.map(x=>x.consensus);
+  const csPos=consensusData.map(x=>x.positive_count);
+  const csNeu=consensusData.map(x=>x.neutral_count);
+  const csNeg=consensusData.map(x=>x.negative_count);
+  csc.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},
+      formatter:function(p){
+        const i=p[0].dataIndex;
+        return '<b>'+csLabels[i]+'</b><br/>共识度: '+csValues[i]+'<br/>正面:'+csPos[i]+' 中性:'+csNeu[i]+' 负面:'+csNeg[i];
+      }
+    },
+    grid:{left:'40%',right:'10%',top:'3%',bottom:'3%',containLabel:false},
+    xAxis:{type:'value',name:'共识度',min:0,max:1},
+    yAxis:{type:'category',data:csLabels},
+    series:[{
+      type:'bar',data:csValues.map(v=>({
+        value:v,
+        itemStyle:{color:v>=0.7?'#2e8b57':v>=0.4?'#e67e22':'#c0392b'}
+      })),
+      label:{show:true,position:'right',formatter:function(p){return p.value.toFixed(2)}}
+    }],
+    visualMap:{show:false,min:0,max:1,inRange:{color:['#c0392b','#e67e22','#2e8b57']}}
+  });
+}
+
+if(quadrantData.length>0 && document.getElementById('quadrantChart')){
+  const qc=echarts.init(document.getElementById('quadrantChart'));
+  deepCharts.push(qc);
+  const L1_COLORS={'剧情叙事':'#e74c3c','角色机制':'#3498db','玩法机制':'#2ecc71','地图探索':'#f39c12','养成系统':'#9b59b6','运营活动':'#1abc9c','社区环境':'#e67e22','运营沟通':'#95a5a6'};
+  const l1Set=[...new Set(quadrantData.map(x=>x.level_1))];
+  const seriesMap={};
+  quadrantData.forEach(function(d){
+    if(!seriesMap[d.level_1])seriesMap[d.level_1]=[];
+    seriesMap[d.level_1].push([d.x_volume_share,d.y_sentiment_score,d.count,d.display,d.consensus]);
+  });
+  const qSeries=l1Set.map(function(l1){
+    return {
+      name:l1,type:'scatter',
+      symbolSize:function(d){return Math.max(12,Math.min(50,d[2]*5))},
+      itemStyle:{color:L1_COLORS[l1]||'#7f8c8d',opacity:0.8},
+      data:seriesMap[l1]||[],
+      label:{show:true,formatter:function(p){return p.value[3].split('/')[1]},position:'right',fontSize:11},
+      emphasis:{focus:'series',label:{show:true,fontSize:13,fontWeight:'bold'}}
+    };
+  });
+  qSeries.push({
+    type:'line',markLine:{silent:true,symbol:'none',lineStyle:{type:'dashed',color:'#95a5a6',width:1.5},
+      data:[
+        {xAxis:quadrantCenter.x,label:{formatter:'关注度均值',position:'end'}},
+        {yAxis:quadrantCenter.y,label:{formatter:'满意度均值',position:'end'}}
+      ]
+    }
+  });
+  qc.setOption({
+    tooltip:{trigger:'item',formatter:function(p){
+      if(!p.value||p.value.length<5)return '';
+      return '<b>'+p.value[3]+'</b><br/>关注度: '+p.value[0]+'%<br/>满意度: '+p.value[1]+'%<br/>评论数: '+p.value[2]+'<br/>共识度: '+p.value[4];
+    }},
+    legend:{data:l1Set,top:0},
+    grid:{left:'8%',right:'8%',top:'50',bottom:'10%',containLabel:true},
+    xAxis:{type:'value',name:'关注度 (声量占比%)',nameLocation:'center',nameGap:30,splitLine:{lineStyle:{type:'dashed',opacity:0.3}}},
+    yAxis:{type:'value',name:'满意度 (情感均分%)',min:0,max:100,nameLocation:'center',nameGap:40,splitLine:{lineStyle:{type:'dashed',opacity:0.3}}},
+    series:qSeries,
+    graphic:[
+      {type:'text',left:'12%',top:'8%',style:{text:'🟢 机会区\n(低关注·高满意)',fill:'#2e8b57',fontSize:12,fontWeight:'bold'}},
+      {type:'text',right:'12%',top:'8%',style:{text:'⭐ 优势区\n(高关注·高满意)',fill:'#3498db',fontSize:12,fontWeight:'bold'}},
+      {type:'text',left:'12%',bottom:'14%',style:{text:'⚪ 次要区\n(低关注·低满意)',fill:'#95a5a6',fontSize:12,fontWeight:'bold'}},
+      {type:'text',right:'12%',bottom:'14%',style:{text:'🔴 改进区\n(高关注·低满意)',fill:'#c0392b',fontSize:12,fontWeight:'bold'}}
+    ]
+  });
+}
+
+if(tgiData.length>0 && document.getElementById('tgiChart')){
+  const tc=echarts.init(document.getElementById('tgiChart'));
+  deepCharts.push(tc);
+  const tgiLabels=tgiData.map(x=>(x.node_display||x.node_id.replace('node_',''))+' | '+x.display);
+  const tgiValues=tgiData.map(x=>x.tgi);
+  tc.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},
+      formatter:function(p){
+        const d=tgiData[tgiData.length-1-p[0].dataIndex];
+        return '<b>'+(d.node_display||d.node_id)+'</b><br/>'+d.display+'<br/>TGI: '+d.tgi+'<br/>社群正面率: '+d.node_positive_ratio+'%<br/>全网正面率: '+d.global_positive_ratio+'%<br/>样本数: '+d.node_count;
+      }
+    },
+    grid:{left:'45%',right:'10%',top:'3%',bottom:'3%',containLabel:false},
+    xAxis:{type:'value',name:'TGI',splitLine:{lineStyle:{type:'dashed'}}},
+    yAxis:{type:'category',data:tgiLabels.slice().reverse()},
+    series:[{
+      type:'bar',
+      data:tgiValues.slice().reverse().map(v=>({
+        value:v,
+        itemStyle:{color:v>=120?'#2e8b57':v>=80?'#aab2bd':'#c0392b'}
+      })),
+      label:{show:true,position:'right',formatter:function(p){return p.value}},
+      markLine:{silent:true,symbol:'none',lineStyle:{type:'dashed',color:'#e74c3c',width:1.5},
+        data:[{xAxis:100,label:{formatter:'基准线 100',position:'end'}}]
+      }
+    }]
+  });
+}
+
+if(cooccurrenceData.length>0 && document.getElementById('cooccurrenceChart')){
+  const cc=echarts.init(document.getElementById('cooccurrenceChart'));
+  deepCharts.push(cc);
+  const nodeSet=new Set();
+  cooccurrenceData.forEach(function(e){nodeSet.add(e.source);nodeSet.add(e.target)});
+  const nodes=[...nodeSet].map(function(n){return {name:n,symbolSize:20+cooccurrenceData.filter(e=>e.source===n||e.target===n).reduce((s,e)=>s+e.weight,0)*3}});
+  const links=cooccurrenceData.map(function(e){return {source:e.source,target:e.target,value:e.weight,lineStyle:{width:Math.max(1,e.weight*2),opacity:0.6}}});
+  cc.setOption({
+    tooltip:{trigger:'item',formatter:function(p){
+      if(p.dataType==='edge')return p.data.source+' ↔ '+p.data.target+'<br/>共现次数: '+p.data.value;
+      return p.name;
+    }},
+    series:[{
+      type:'graph',layout:'force',
+      data:nodes,links:links,
+      roam:true,draggable:true,
+      label:{show:true,fontSize:11},
+      force:{repulsion:220,gravity:0.1,edgeLength:[60,200]},
+      emphasis:{focus:'adjacency',lineStyle:{width:4}},
+      lineStyle:{color:'#aaa',curveness:0.15}
+    }]
+  });
+}
+
+window.addEventListener('resize',function(){deepCharts.forEach(function(c){c.resize()});});
+</script>
+</body>
+</html>

@@ -89,7 +89,12 @@
 
 > 看板生成为非阻塞步骤：即使生成失败，也不会影响主流程的 JSON/CSV 产出。
 
-可运行示例后在 `data/work/job_xxx/output/` 中查看实际产出。
+## 示例成果展示
+仓库提供了一份实际运行后的可视化看板：
+
+- **[example_output/dashboard.html](example_output/dashboard.html)**
+
+下载后用浏览器直接打开即可体验完整的分析看板效果（ECharts 图表通过 CDN 加载，需联网）。
 
 ## 依赖
 仓库已提供 `requirements.txt`，可直接执行：
